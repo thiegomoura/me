@@ -3,6 +3,7 @@ header{
 }
 
 body{
+	/*background: #e9e8e9;*/
 	background-color: #fff;
   	color: #666666;
 }
@@ -33,6 +34,10 @@ img{
 .pl p{
 	font-size: 16px;
 	padding: 10px;
+}
+
+.fb {
+	padding-top: 50px;
 }
 
 .fright {
