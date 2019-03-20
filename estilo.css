@@ -1,0 +1,46 @@
+header{
+
+}
+
+body{
+	background: #fff;
+  	color: #666666;
+}
+
+img{
+	margin-top: 100px;
+	width: 110px;
+}
+
+@media (min-width: 992px) {
+  .fright {
+  	margin-top: 100px;
+  }
+}
+
+.content {
+	overflow:hidden;
+}
+
+.aside {
+	width:200px;
+}
+
+.fleft {
+	float:left;
+}
+
+.pl p{
+	font-size: 14px;
+	padding: 10px;
+}
+
+.fright {
+	float:right;
+}
+
+footer{
+    position:absolute;
+    bottom:5px;
+    width:100%;
+}
