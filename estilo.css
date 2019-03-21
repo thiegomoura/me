@@ -23,6 +23,10 @@ p.italic{
   .fright {
   	margin-top: 50px;
   }
+
+  footer{
+  	position: absolute;
+  }
 }
 
 @media (max-width: 991px){
@@ -57,7 +61,6 @@ p.italic{
 }
 
 footer{
-    position:absolute;
     bottom:10px;
     width:100%;
 }
