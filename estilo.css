@@ -19,6 +19,10 @@ p.italic{
 	margin: 0px;
 }
 
+p.post{
+	text-align: justify;
+}
+
 @media (min-width: 992px) {
   .fright {
   	margin-top: 50px;
