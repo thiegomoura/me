@@ -64,6 +64,10 @@ p.post{
 
 }
 
+nav .nav-bar {
+    background-color: mediumaquamarine;
+}
+
 footer{
     bottom:10px;
     width:100%;
