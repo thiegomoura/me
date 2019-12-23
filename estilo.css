@@ -5,12 +5,26 @@ header{
 body{
 	/*background: #e9e8e9;*/
 	background-color: #fff;
-	color: #666666;
+	color: #fff;
+	background-image: url("img/florest-res.jpg");
+	background-repeat: repeat;
 }
 
 img{
 	margin-top: 60px;
 	width: 110px;
+}
+
+a{
+	color: #fff;
+}
+
+a:hover {
+	color: #000;
+}
+
+h4{
+	color: #000;
 }
 
 p.italic{
@@ -45,6 +59,18 @@ p.post{
 
 .pl p{
 	padding: 10px;
+	background-color: #000;
+	border-radius: 10px;
+	padding: 5px;
+	border-spacing: 10px;
+}
+
+.pr p{
+	padding: 10px;
+	background-color: #000;
+	border-radius: 10px;
+	padding: 5px;
+	border-spacing: 10px;
 }
 
 .section-header {
@@ -57,6 +83,8 @@ nav .nav-bar {
 }
 
 footer{
-	bottom:10px;
-	width:100%;
+	bottom: 10px;
+	width: 100%;
+	color: #fff;
+
 }
