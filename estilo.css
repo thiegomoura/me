@@ -11,9 +11,14 @@ body{
 	filter: alpha(opacity=80);
 }
 
+img#perfil{
+	margin-top: 60px;
+	width: 50%;
+}
+
 img{
 	margin-top: 60px;
-	width: 110px;
+	width: 20%;
 }
 
 a{
@@ -51,6 +56,16 @@ p.post{
 @media (max-width: 991px){
 	.margin {
 		margin-top: 10px;
+	}
+
+	img#perfil{
+		margin-top: 60px;
+		width: 30%;
+	}
+
+	img{
+		margin-top: 60px;
+		width: 30%;
 	}
 }
 
