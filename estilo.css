@@ -22,7 +22,7 @@ header {
 body {
 	background-color: var(--bg-color);
 	color: var(--text-color);
-	/* font-family: 'Source Code Pro', monospace; */
+	font-family: 'Source Code Pro', monospace;
 	font-size: 1rem;	
 }
 
@@ -66,14 +66,6 @@ main {
 	border: 0.05rem solid var(--color-green);
 	margin: 0.5rem;
 	width: 200px;
-}
-
-p.italic {
-	margin-bottom: 0;
-}
-
-p.contact {
-	margin-right: 0.3rem;
 }
 
 .profile-social {
