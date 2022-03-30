@@ -1,19 +1,28 @@
+const icon = document.querySelector('#theme i');
+
 function setTheme(themeName) {
     localStorage.setItem('theme', themeName);
     document.documentElement.className = themeName;
 }
 
 function toggleTheme() {
-    console.log('lo')
-    if (localStorage.getItem('theme') === 'theme-dark')
+    if (localStorage.getItem('theme') === 'theme-dark') {
         setTheme('theme-ligth')
-    else
+        icon.removeAttribute('bi-cloud-moon-fill');
+        icon.setAttribute('class', 'bi-cloud-sun-fill');
+    } else {
         setTheme('theme-dark')
+        icon.removeAttribute('bi-cloud-sun-fill');
+        icon.setAttribute('class', 'bi-cloud-moon-fill');
+    }
 }
 
 (function() {
-    if (localStorage.getItem('theme') === 'theme-dark')
+    if (localStorage.getItem('theme') === 'theme-dark') {
         setTheme('theme-dark')
-    else
+        icon.setAttribute('class', 'bi-cloud-moon-fill');
+    } else {
         setTheme('theme-ligth')
+        icon.setAttribute('class', 'bi-cloud-sun-fill');
+    }
 })();
