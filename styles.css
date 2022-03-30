@@ -1,0 +1,185 @@
+@import "https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap";
+
+/* :root {
+    --bg-color: #282a36;
+    --bg-color-header: rgba(0, 0, 0, 0.1);
+    --bg-color-dark: #e9e8e9;
+    --font-color: #fff;
+    --color-green: #50fa7b;
+} */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.theme-light {
+    --color-primary: #0060df;
+    --color-secondary: #fbfbfe;
+    --color-accent: #fd6f53;
+    --font-color: #000000;
+    --bg-color: #282a36;
+    --bg-color-header: rgba(0, 0, 0, 0.1);
+    --bg-color-dark: #e9e8e9;
+    --color-green: #50fa7b;
+}
+
+.theme-dark {
+    --color-primary: #17ed90;
+    --color-secondary: #243133;
+    --color-accent: #12cdea;
+    --font-color: #ffffff;
+    --bg-color: #282a36;
+    --bg-color-header: rgba(0, 0, 0, 0.1);
+    --bg-color-dark: #e9e8e9;
+    --color-green: #50fa7b;
+}
+
+
+/* The switch - the box around the slider */
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+
+/* Hide default HTML checkbox */
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+
+/* The slider */
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 40px;
+    width: 40px;
+    left: 0px;
+    bottom: 4px;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    box-shadow: 0 0px 15px #2020203d;
+    background: white;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+input:checked+.slider {
+    background-color: #2196f3;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(24px);
+    -ms-transform: translateX(24px);
+    transform: translateX(24px);
+    background: white url('https://i.ibb.co/7JfqXxB/sunny.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+/* Rounded sliders */
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+header {
+    background: var(--bg-color-header);
+    color: var(--font-color);
+    border-bottom: 1px solid #333;
+}
+
+body {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 1.2rem;
+    color: var(--font-color);
+    background-color: var(--bg-color);
+}
+
+ul li {
+    list-style-position: inside;
+}
+
+.list-contact li {
+    list-style-type: none;
+}
+
+a {
+    color: var(--font-color);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--color-green) !important;
+    text-decoration: none;
+}
+
+a.active {
+    border-bottom: 2px solid;
+    border-color: var(--color-green);
+}
+
+button {
+    color: var(--font-color);
+}
+
+.navbar-brand img {
+    max-height: 32px;
+}
+
+
+/* #profile {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 700px;
+} */
+
+#profile .profile-image {
+    border-radius: 50%;
+    border: 0.05rem solid var(--color-green);
+    margin: 0.5rem;
+    width: 120px;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
