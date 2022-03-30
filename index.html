@@ -1,87 +1,107 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" class="theme-dark">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <!--Fonts-->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-  <link rel="shortcut icon" type="imagem/x-icon" href="favicon.ico" />
-  <link href="estilo.css" rel="stylesheet">
-  <title>Thiego Moura - Personal Blog</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <!-- Bootstrap icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="shortcut icon" type="imagem/x-icon" href="favicon.ico" />
+    <link href="styles.css" rel="stylesheet">
+    <title>Thiego Moura - Personal Blog</title>
 </head>
 
-<body>
-  <header>
-    <nav class="navbar navbar-expand-lg">
-      <a class="navbar-brand" href="./index.html">Thiego's blog</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fas fa-bars"></i>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="./timeline.html">Timeline</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="./portfolio.html">Portfolio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="./projects.html">Projects</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </header>
-  <main>
-    <div id="profile">
-      <img class="profile-image"
-        src="./img/th.jpg">
-      <h5><strong>Thiego</strong> R. Moura</h5>
-      <p>A Brazilian IT analyst (under construction).</p>
-      <ul>
-        <li>A trainner, gamer, programador bolado and technology enthusiast in the open hours 📌</li>
-        <li>It Analyst Computer Science Student 💻</li>
-        <li>Since 1997 🚼</li>
-        <li>From Brazil 🇧🇷</li>
-      </ul>
-      <!-- <p>I'm a trainner, gamer, programador bolado and technology enthusiast in the open hours. Computer Science
-        Student. Since 1997. From Barra do Bugres - MT.</p> -->
-    </div>
-    <div id="content">
-      <h4>Hello guys!</h4>
-      <p class="content-text">Welcome to <strong>(project of)</strong> my personal blog. The proposal of this blog is to
-        post random things and personal interest, to train some
-        techniques of web programming and mainly to stimulate the learning of the English language, therefore they
-        are not as critical as the coherence of a beginner.</p>
-        <p class="italic">follow me</p>
-        <div class="profile-social">
-          <a href="http://github.com/thiegomoura" target="_blank"><i class="fab fa-github"></i> Github</a>
-          <a href="https://www.linkedin.com/in/thiegomoura/" target="_blank"><i class="fab fa-linkedin"></i> Linkedin</a>
-          <a href="http://www.instagram.com/thiego_moura/" target="_blank"><i class="fab fa-instagram"></i>
-            Instagram</a>
+<body class=" d-flex flex-column align-content-around">
+    <header>
+        <nav class="container navbar navbar-expand-lg">
+            <a class="navbar-brand" href="./index.html">
+                <img src="./img/logo.svg" alt="Logo">
+                <span>Thiego's blog</span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./timeline.html">Timeline</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./portfolio.html">Portfolio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./projects.html">Projects</a>
+                    </li>
+                </ul>
+            </div>
+            <a class="p-2">
+                <i class="bi bi-brightness-high-fill" onclick="toggleTheme()"></i>
+            </a>
+            <a class="btn-secondary rounded p-2" href="./docs/cv.pdf" download="thiego-moura-curriculo">
+                <span>Download CV</span>
+                <i class="bi bi-cloud-download"></i>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+    <main class="container vh-100 py-3">
+        <div class="row">
+            <div class="col-md-4">
+                <div id="profile">
+                    <img class="profile-image mx-auto" src="./img/th.jpg">
+                    <h4><strong>Thiego</strong> R. Moura</h4>
+                    <ul>
+                        <li>Web developer and Computer Science Student 💻</li>
+                        <li>Born in 1997 🚼</li>
+                        <li>Live's in Brazil 🇧🇷</li>
+                    </ul>
+                    <h4>Contact me at</h4>
+                    <ul class="list-contact">
+                        <li>
+                            <a href="http://github.com/thiegomoura" target="_blank">
+                                <i class="bi bi-github"></i>
+                                <span>Github</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/in/thiegomoura/" target="_blank">
+                                <i class="bi bi-linkedin"></i>
+                                <span>Linkedin</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mailto:thi-ego@hotmail.com">
+                                <i class="bi bi-envelope"></i>
+                                <span>thi-ego@hotmail.com</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col">
+                <div id="content">
+                    <h4>Hello guys!</h4>
+                    <p class="content-text">Welcome to <strong>(project of)</strong> my personal blog. The proposal of this blog is to post random things and personal interest, to train some techniques of web programming and mainly to stimulate the learning of the English language,
+                        therefore they are not as critical as the coherence of a beginner.</p>
+                </div>
+            </div>
         </div>
-        <p class="italic contact">contact me at</p>
-        <a href="mailto:thi-ego@hotmail.com">thi-ego<i class="fas fa-at"></i>hotmail.com</a>
-    </div>
-  </main>
-  <!-- <iframe
+    </main>
+    <!-- <iframe
     src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fgit.io%2FJe0MD&width=72&layout=box_count&action=like&size=large&show_faces=true&share=false&height=65&appId=347980555926770"
     width="72" height="65" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"
     allow="encrypted-media"></iframe> -->
-  <footer>
-    <span>&copy; TM 2021 - All rights reserved.</span>
-  </footer>
+    <footer>
+        <span>&copy; TM 2022 - All rights reserved.</span>
+    </footer>
 </body>
+<script src="./js/script.js"></script>
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-  integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 </html>
