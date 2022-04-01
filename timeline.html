@@ -1,72 +1,197 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" class="theme-dark">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <!--Fonts-->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-  <link rel="shortcut icon" type="imagem/x-icon" href="favicon.ico" />
-  <link href="estilo.css" rel="stylesheet">
-  <title>Thiego Moura - Personal Blog</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="shortcut icon" type="imagem/x-icon" href="favicon.ico" />
+    <link href="styles.css" rel="stylesheet">
+    <title>Thiego Moura - Personal Blog</title>
 </head>
 
-<body>
-  <header>
-    <nav class="navbar navbar-expand-lg">
-      <a class="navbar-brand" href="./index.html">Thiego's blog</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fas fa-bars"></i>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link active" href="./timeline.html">Timeline</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="./portfolio.html">Portfolio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="./projects.html">Projects</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </header>
-  <main>
-    <div id="content">
-      <h2>&lt;Projects/&gt;</h2>
-      <p>Some <strong>random</strong> activities.</p>
-      <h3>&lt;Timeline/&gt;</h3>
-      <p>Just <strong>a few</strong> hobbies.</p>
-      <h5>Building (...)</h5>
-      <p>Feugiat in etiam libero ultricies potenti vehicula est, sem est neque gravida integer habitant primis at, nam
-        conubia ut vitae ullamcorper libero. sodales interdum pellentesque aliquam integer diam eget vulputate nunc
-        morbi non maecenas cubilia pretium tincidunt fringilla, potenti leo vulputate taciti himenaeos molestie tempus
-        erat dictum eleifend tincidunt pellentesque suscipit netus.</p>
-    </div>
-    <p class="italic">follow me</p>
-    <div class="profile-social">
-      <a href="http://github.com/thiegomoura" target="_blank"><i class="fab fa-github"></i> Github</a>
-      <a href="https://www.linkedin.com/in/thiegomoura/" target="_blank"><i class="fab fa-linkedin"></i> Linkedin</a>
-      <a href="http://www.instagram.com/thiego_moura/" target="_blank"><i class="fab fa-instagram"></i>
-        Instagram</a>
-    </div>
-    <p class="italic contact">contact me at</p>
-    <a href="mailto:thi-ego@hotmail.com">thi-ego<i class="fas fa-at"></i>hotmail.com</a>
-    </div>
-  </main>
-  <footer>
-    <span>&copy; TM 2021 - All rights reserved.</span>
-  </footer>
+<body class=" d-flex flex-column align-content-around">
+    <header>
+        <nav class="container navbar navbar-expand-lg">
+            <a class="navbar-brand" href="./index.html">
+                <img src="./img/logo.svg" alt="Logo" class="rounded logo">
+                <span>Thiego's blog</span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./timeline.html">Timeline</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./projects.html">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Newspaper</a>
+                    </li>
+                </ul>
+            </div>
+            <a id="theme" class="px-4 ml-auto">
+                <i class="bi" onclick="toggleTheme()"></i>
+            </a>
+            <a class="btn-secondary d-none d-lg-block rounded p-2" href="./docs/cv.pdf" download="thiego-moura-curriculo">
+                <span>Download CV</span>
+                <i class="bi bi-cloud-download"></i>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="bi bi-list"></i>
+            </button>
+        </nav>
+    </header>
+    <main class="container py-3">
+        <div id="timeline">
+            <h3 class="title text-center py-3">Timeline</h3>
+            <!-- <ul class="text-center">
+                <li>2020.11 - Efetivado como Analista de Tecnologia. Usina Barralcool</li>
+                <li>2020 - Efetivado como Analista de Tecnologia. Usina Barralcool</li>
+                <li>2019 - Retomo os estudos a área de desenvolvimento de software</li>
+                <li>2018 - Efetivado como Assis. de Tecnologia. Usina Barralcool</li>
+                <li>2016 - Início do estágio em TI. Usina Barralcool</li>
+                <li>2015 - Ingresso na Universidade do Estado de Mato Grosso. Para cursa Ciência da Computação.</li>
+                <li>2015 - Concluo o ensino médio</li>
+                <li>2012 - Primeiro contato com computadores!</li>
+                <li>2012 - A developer was born!</li>
+            </ul> -->
+            <div class="card bg-dark p-1 text-center">
+                <div class="step">
+                    <div class="step-number">
+                        <span class="data-step text-muted">2022</span>
+                        <p>State University of Mato Grosso</p>
+                    </div>
+                    <p class="step-title">This space is reserved for the completion of graduation.</p>
+                </div>
+            </div>
+            <div class="card bg-light p-1 text-center">
+                <div class="step">
+                    <div class="step-number">
+                        <span class="data-step text-muted">2021</span>
+                        <p>iClubs</p>
+                    </div>
+                    <p class="step-title">Effective as Backend Developer JR.</p>
+                </div>
+            </div>
+            <div class="card bg-light p-1 text-center">
+                <div class="step">
+                    <div class="step-number">
+                        <span class="data-step text-muted">2021</span>
+                        <p>Barralcool Group</p>
+                    </div>
+                    <p class="step-title">Effective as a Technology Analyst.</p>
+                </div>
+            </div>
+            <div class="card bg-light p-1 text-center">
+                <div class="step">
+                    <div class="step-number">
+                        <span class="data-step text-muted">2018</span>
+                    </div>
+                    <p class="step-title">I decide to migrate to the area of software development and return to studies on programming.</p>
+                </div>
+            </div>
+            <div class="card bg-light p-1 text-center">
+                <div class="step">
+                    <div class="step-number">
+                        <span class="data-step text-muted">2018</span>
+                        <p></p>
+                    </div>
+                    <p class="step-title">I start to study about web development and develop some projects.</p>
+                </div>
+            </div>
+            <div class="card bg-light p-1 text-center">
+                <div class="step">
+                    <div class="step-number">
+                        <span class="data-step text-muted">2018</span>
+                        <p>Barralcool Group</p>
+                    </div>
+                    <p class="step-title">Efetivado como Assistente de Tecnologia.</p>
+                </div>
+            </div>
+            <div class="card bg-light p-1 text-center">
+                <div class="step">
+                    <div class="step-number">
+                        <span class="data-step text-muted">2016</span>
+                        <p>Barralcool Group</p>
+                    </div>
+                    <p class="step-title">Start of the IT internship</p>
+                </div>
+            </div>
+            <div class="card bg-light p-1 text-center">
+                <div class="step">
+                    <div class="step-number">
+                        <span class="data-step text-muted">2015</span>
+                        <p>State University of Mato Grosso</p>
+                    </div>
+                    <p class="step-title">Admission to the Computer Science course.</p>
+                </div>
+            </div>
+            <div class="card bg-light p-1 text-center">
+                <div class="step">
+                    <div class="step-number">
+                        <span class="data-step text-muted">2015</span>
+                    </div>
+                    <p class="step-title">I finish high school.</p>
+                </div>
+            </div>
+            <div class="card bg-light p-1 text-center">
+                <div class="step">
+                    <div class="step-number">
+                        <span class="data-step text-muted">2012</span>
+                        <p>Federal Institute of Education, Science and Technology of Mato Grosso</p>
+                    </div>
+                    <p class="step-title">Start the technical course in development. of systems integrated to High School.</p>
+                </div>
+            </div>
+            <div class="card bg-light p-1 text-center">
+                <div class="step">
+                    <div class="step-number">
+                        <span class="data-step text-muted">2006</span>
+                    </div>
+                    <p class="step-title">First contact with computers!</p>
+                </div>
+            </div>
+            <div class="card bg-light p-1 text-center">
+                <div class="step">
+                    <div class="step-number">
+                        <span class="data-step text-muted">1997</span>
+                    </div>
+                    <p class="step-title">A developer was born!</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <p></p>
+    <!-- <iframe
+    src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fgit.io%2FJe0MD&width=72&layout=box_count&action=like&size=large&show_faces=true&share=false&height=65&appId=347980555926770"
+    width="72" height="65" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"
+    allow="encrypted-media"></iframe> -->
+    <footer class="container d-flex flex-column">
+        <div class="text-center">
+            <img src="./img/logo-dark.svg" alt="Logo" class="rounded w-25">
+        </div>
+        <span class="text-muted">&copy; TM 2022 - All rights reserved.</span>
+    </footer>
 </body>
+<script src="./js/script.js"></script>
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-  integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+
+</html>

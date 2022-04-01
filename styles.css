@@ -1,5 +1,3 @@
-@import "https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap";
-
 /* :root {
     --bg-color: #282a36;
     --bg-color-header: rgba(0, 0, 0, 0.1);
@@ -32,7 +30,7 @@
     --font-color: #ffffff;
     --bg-color: #282a36;
     --bg-color-header: rgba(0, 0, 0, 0.1);
-    --bg-color-dark: #e9e8e9;
+    --bg-color-dark: #343a40;
     --color-green: #50fa7b;
 }
 
@@ -43,23 +41,29 @@ header {
 }
 
 body {
-    font-family: 'Source Code Pro', monospace;
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    ;
     font-size: 1.2rem;
     color: var(--font-color);
     background-color: var(--bg-color);
+}
+
+.title::before {
+    content: '</';
+}
+
+.title::after {
+    content: '>';
 }
 
 ul li {
     list-style-position: inside;
 }
 
-.list-contact li {
-    list-style-type: none;
-}
-
 a {
     color: var(--font-color);
     text-decoration: none;
+    cursor: pointer;
 }
 
 a:hover {
@@ -95,6 +99,38 @@ button {
     border: 0.05rem solid var(--color-green);
     margin: 0.5rem;
     width: 120px;
+}
+
+.card {
+    /* border-color: #dee2e6; */
+    background-color: var(--bg-color-dark) !important;
+}
+
+.card .step {
+    position: relative;
+}
+
+.card .step .step-number {
+    line-height: 1.5rem;
+    position: relative;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.card .step .step-number .data-step {
+    font-weight: 900;
+    font-size: 1.6rem;
+}
+
+.card .step .step-title {
+    color: var(--font-color);
+    margin: 0;
+    /* font-size: 1.5rem; */
+    line-height: 2rem;
+}
+
+div.card+div.card {
+    margin-top: 20px;
 }
 
 footer {
