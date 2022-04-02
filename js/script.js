@@ -17,7 +17,7 @@ function toggleTheme() {
     }
 }
 
-(function() {
+(function () {
     if (localStorage.getItem('theme') === 'theme-dark') {
         setTheme('theme-dark')
         icon.setAttribute('class', 'bi-cloud-moon-fill');
@@ -26,3 +26,13 @@ function toggleTheme() {
         icon.setAttribute('class', 'bi-cloud-sun-fill');
     }
 })();
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});
