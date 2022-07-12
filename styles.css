@@ -1,0 +1,153 @@
+/* :root {
+    --bg-color: #282a36;
+    --bg-color-header: rgba(0, 0, 0, 0.1);
+    --bg-color-dark: #e9e8e9;
+    --font-color: #fff;
+    --color-green: #50fa7b;
+} */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.theme-light {
+    --color-primary: #0060df;
+    --color-secondary: #c0c0c0;
+    --color-accent: #fd6f53;
+    --font-color: #000000;
+    --bg-color: #efefef;
+    --bg-color-header: rgba(255, 255, 255, 1);
+    --bg-color-dark: #e9e8e9;
+    --color-green: #50fa7b;
+}
+
+.theme-dark {
+    --color-primary: #17ed90;
+    --color-secondary: #243133;
+    --color-accent: #12cdea;
+    --font-color: #ffffff;
+    --bg-color: #282a36;
+    --bg-color-header: rgba(0, 0, 0, 1);
+    --bg-color-dark: #343a40;
+    --color-green: #50fa7b;
+}
+
+
+header {
+    background: var(--bg-color-header);
+    color: var(--font-color);
+    border-bottom: 1px solid #333;
+    z-index: 99;
+}
+
+body {
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    ;
+    font-size: 1.2rem;
+    color: var(--font-color);
+    background-color: var(--bg-color);
+}
+
+main {
+    margin-top: 60px;
+}
+
+.title::before {
+    content: '</';
+}
+
+.title::after {
+    content: '>';
+}
+
+ul li {
+    list-style-position: inside;
+}
+
+a {
+    color: var(--font-color);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+a:hover {
+    color: var(--color-green) !important;
+    text-decoration: none;
+}
+
+a.active {
+    border-bottom: 2px solid;
+    border-color: var(--color-green);
+}
+
+a[disabled="true"] {
+    cursor: not-allowed;
+    pointer-events: none;
+    color: var(--color-secondary);
+}
+
+button {
+    color: var(--font-color);
+}
+
+.navbar-brand img {
+    max-height: 32px;
+}
+
+
+/* #profile {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 700px;
+} */
+
+#profile .profile-image {
+    border-radius: 50%;
+    border: 0.05rem solid var(--color-green);
+    margin: 0.5rem;
+    width: 120px;
+}
+
+.card {
+    /* border-color: #dee2e6; */
+    background-color: var(--bg-color-dark) !important;
+}
+
+.card .step {
+    position: relative;
+}
+
+.card .step .step-number {
+    line-height: 1.5rem;
+    position: relative;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.card .step .step-number .data-step {
+    font-weight: 900;
+    font-size: 1.6rem;
+}
+
+.card .step .step-title {
+    color: var(--font-color);
+    margin: 0;
+    /* font-size: 1.5rem; */
+    line-height: 2rem;
+}
+
+div.card+div.card {
+    margin-top: 20px;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}

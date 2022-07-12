@@ -1,71 +1,145 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" class="theme-dark">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <!--Fonts-->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-  <link rel="shortcut icon" type="imagem/x-icon" href="favicon.ico" />
-  <link href="estilo.css" rel="stylesheet">
-  <title>Thiego Moura - Personal Blog</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="shortcut icon" type="imagem/x-icon" href="favicon.ico" />
+    <link href="styles.css" rel="stylesheet">
+    <title>Thiego Moura - Personal Blog</title>
 </head>
 
-<body>
-  <header>
-    <nav class="navbar navbar-expand-lg">
-      <a class="navbar-brand" href="./index.html">Thiego's blog</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fas fa-bars"></i>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="./timeline.html">Timeline</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="./portfolio.html">Portfolio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="./projects.html">Projects</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </header>
-  <main>
-    <div id="content">
-      <h2>&lt;Projects/&gt;</h2>
-      <p>Some <strong>random</strong> activities.</p>
-      <ul>
-        <li><a href="./post/distributed-systems.html">
-            <h5>Overview of Distributed Systems</h5>
-            <p>Its purpose is to provide an overview of the activities developed during the course of the course.</p>
-          </a>
-        </li>
-      </ul>
-      <p class="italic">follow me</p>
-      <div class="profile-social">
-        <a href="http://github.com/thiegomoura" target="_blank"><i class="fab fa-github"></i> Github</a>
-        <a href="https://www.linkedin.com/in/thiegomoura/" target="_blank"><i class="fab fa-linkedin"></i> Linkedin</a>
-        <a href="http://www.instagram.com/thiego_moura/" target="_blank"><i class="fab fa-instagram"></i>
-          Instagram</a>
-      </div>
-      <p class="italic contact">contact me at</p>
-      <a href="mailto:thi-ego@hotmail.com">thi-ego<i class="fas fa-at"></i>hotmail.com</a>
-    </div>
-  </main>
-  <footer>
-    <span>&copy; TM 2021 - All rights reserved.</span>
-  </footer>
+<body class=" d-flex flex-column align-content-around">
+    <header>
+        <nav class="container navbar navbar-expand-lg">
+            <a class="navbar-brand" href="./index.html">
+                <img src="./img/logo.svg" alt="Logo" class="rounded logo">
+                <span>Thiego's blog</span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./projects.html">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/index.html#timeline">Timeline</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Newspaper</a>
+                    </li>
+                </ul>
+            </div>
+            <a id="theme" class="px-4 ml-auto">
+                <i class="bi" onclick="toggleTheme()"></i>
+            </a>
+            <a class="btn-secondary d-none d-lg-block rounded p-2" href="./docs/cv.pdf"
+                download="thiego-moura-curriculo">
+                <span>Download CV</span>
+                <i class="bi bi-cloud-download"></i>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="bi bi-list"></i>
+            </button>
+        </nav>
+    </header>
+    <main class="container py-3">
+        <div id="projects">
+            <h3 class="title text-center pt-3">Projects</h3>
+            <div class="row">
+                <div class="col-md-4 p-2">
+                    <div class="border rounded p-3">
+                        <img src="./img/projects/rotaract.png" alt="Website Grupo Barralcool" class="w-100 rounded">
+                        <div class="card-title text-center">
+                            <h5 class="pt-3">Rotaract Brasil</h5>
+                            <ul class="list-techs list-unstyled d-flex justify-content-center">
+                                <li><span class="badge bg-secondary text-nowrap">Wordpress</span></li>
+                                <li><span class="badge bg-secondary text-nowrap ml-1">Bootstrap</span></li>
+                            </ul>
+                            <span class="text-muted text-monospace">Redesign of the institutional website developed for
+                                Rotaract Brazil Organization.</span>
+                        </div>
+                        <div class="card-links d-flex justify-content-around">
+                            <a href="http://rotaractbrasil.org.br" target="_blank" rel="noopener noreferrer">
+                                <i class="bi bi-link-45deg"></i></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 p-2">
+                    <div class="border rounded p-3">
+                        <img src="./img/projects/barralcool.png" alt="Website Grupo Barralcool" class="w-100 rounded">
+                        <div class="card-title text-center">
+                            <h5 class="pt-3">Grupo Barralcool</h5>
+                            <ul class="list-techs list-unstyled d-flex justify-content-center">
+                                <li><span class="badge bg-secondary text-nowrap">Wordpress</span></li>
+                                <li><span class="badge bg-secondary text-nowrap ml-1">Bootstrap</span></li>
+                            </ul>
+                            <span class="text-muted text-monospace">Redesign of the institutional website developed for
+                                Grupo Barralcool, changing the layout to something modern and clean.</span>
+                        </div>
+                        <div class="card-links d-flex justify-content-around">
+                            <a href="http://barralcool.com.br" target="_blank" rel="noopener noreferrer">
+                                <i class="bi bi-link-45deg"></i></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 p-2">
+                    <div class="border rounded p-3">
+                        <img src="./img/projects/conarc-da-transformacao.png" alt="Website Grupo Barralcool"
+                            class="w-100 rounded">
+                        <div class="card-title text-center">
+                            <h5 class="pt-3">Conarc da Transformação</h5>
+                            <ul class="list-techs list-unstyled d-flex justify-content-center">
+                                <li><span class="badge bg-secondary text-nowrap">Bootstrap</span></li>
+                                <li><span class="badge bg-secondary text-nowrap ml-1">HTML5</span></li>
+                                <li><span class="badge bg-secondary text-nowrap ml-1">CSS3</span></li>
+                            </ul>
+                            <span class="text-muted text-monospace">Website responsive developed for the national event,
+                                based in
+                                Cuiabá - Mato Grosso.</span>
+                        </div>
+                        <div class="card-links d-flex justify-content-around">
+                            <a href="https://github.com/thiegomoura/conarc-2019.git" target="_blank"
+                                rel="noopener noreferrer">
+                                <i class="bi bi-github"></i>
+                            </a>
+                            <a href="https://thiegomoura.github.io/conarc-2019/" target="_blank"
+                                rel="noopener noreferrer">
+                                <i class="bi bi-link-45deg"></i></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="container d-flex flex-column">
+        <div class="text-center">
+            <img src="./img/logo-dark.svg" alt="Logo" class="rounded w-25">
+        </div>
+        <span class="text-muted">&copy; TM 2022 - All rights reserved.</span>
+    </footer>
 </body>
+<script src="./js/script.js"></script>
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-  integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+
+</html>
