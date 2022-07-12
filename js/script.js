@@ -7,7 +7,7 @@ function setTheme(themeName) {
 
 function toggleTheme() {
     if (localStorage.getItem('theme') === 'theme-dark') {
-        setTheme('theme-ligth')
+        setTheme('theme-light')
         icon.removeAttribute('bi-cloud-moon-fill');
         icon.setAttribute('class', 'bi-cloud-sun-fill');
     } else {
@@ -18,11 +18,11 @@ function toggleTheme() {
 }
 
 (function () {
-    if (localStorage.getItem('theme') === 'theme-dark') {
+    if (localStorage.getItem('theme') === 'theme-dark' || !localStorage.getItem('theme')) {
         setTheme('theme-dark')
         icon.setAttribute('class', 'bi-cloud-moon-fill');
     } else {
-        setTheme('theme-ligth')
+        setTheme('theme-light')
         icon.setAttribute('class', 'bi-cloud-sun-fill');
     }
 })();

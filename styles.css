@@ -14,11 +14,11 @@
 
 .theme-light {
     --color-primary: #0060df;
-    --color-secondary: #fbfbfe;
+    --color-secondary: #c0c0c0;
     --color-accent: #fd6f53;
     --font-color: #000000;
-    --bg-color: #282a36;
-    --bg-color-header: rgba(0, 0, 0, 0.1);
+    --bg-color: #efefef;
+    --bg-color-header: rgba(255, 255, 255, 1);
     --bg-color-dark: #e9e8e9;
     --color-green: #50fa7b;
 }
@@ -29,15 +29,17 @@
     --color-accent: #12cdea;
     --font-color: #ffffff;
     --bg-color: #282a36;
-    --bg-color-header: rgba(0, 0, 0, 0.1);
+    --bg-color-header: rgba(0, 0, 0, 1);
     --bg-color-dark: #343a40;
     --color-green: #50fa7b;
 }
+
 
 header {
     background: var(--bg-color-header);
     color: var(--font-color);
     border-bottom: 1px solid #333;
+    z-index: 99;
 }
 
 body {
@@ -46,6 +48,10 @@ body {
     font-size: 1.2rem;
     color: var(--font-color);
     background-color: var(--bg-color);
+}
+
+main {
+    margin-top: 60px;
 }
 
 .title::before {
@@ -74,6 +80,12 @@ a:hover {
 a.active {
     border-bottom: 2px solid;
     border-color: var(--color-green);
+}
+
+a[disabled="true"] {
+    cursor: not-allowed;
+    pointer-events: none;
+    color: var(--color-secondary);
 }
 
 button {
