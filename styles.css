@@ -174,3 +174,17 @@ button {
   color: var(--font-color);
   opacity: 0.7;
 }
+
+@media (max-width: 576px) {
+  .logo-footer {
+    width: 80px;
+  }
+
+  .footer-text {
+    font-size: 0.8rem;
+  }
+}
+
+#projects {
+    margin-bottom: 4rem;
+}
