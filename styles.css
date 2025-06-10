@@ -114,8 +114,17 @@ button {
 }
 
 .card {
-    /* border-color: #dee2e6; */
     background-color: var(--bg-color-dark) !important;
+    color: var(--font-color);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .card .step {
@@ -123,31 +132,45 @@ button {
 }
 
 .card .step .step-number {
-    line-height: 1.5rem;
-    position: relative;
-    font-weight: 600;
-    font-size: 1.2rem;
+    font-weight: 700;
+    font-size: 1.125rem; /* 18px */
+    color: var(--color-accent);
+    margin-bottom: 0.25rem;
 }
 
 .card .step .step-number .data-step {
     font-weight: 900;
-    font-size: 1.6rem;
+    font-size: 1.5rem; /* 24px */
+    color: var(--color-primary);
 }
 
 .card .step .step-title {
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 2rem;
     color: var(--font-color);
     margin: 0;
-    /* font-size: 1.5rem; */
-    line-height: 2rem;
 }
 
-div.card+div.card {
-    margin-top: 20px;
+.card + .card {
+    margin-top: 1.5rem;
 }
 
-footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
+.footer {
+  background-color: var(--bg-color-header);
+  color: var(--font-color);
+  border-top: 1px solid var(--color-secondary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.logo-footer {
+  width: 100px;
+  max-width: 40%;
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.2));
+}
+
+.footer-text {
+  font-size: 0.9rem;
+  color: var(--font-color);
+  opacity: 0.7;
 }

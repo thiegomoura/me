@@ -1,0 +1,115 @@
+[
+  {
+    "year": "2025",
+    "events": [
+        {
+        "organization": "Faculdade de Tecnologia Rocketseat",
+        "description": "I started a specialization in Artificial Intelligence."
+        },
+      {
+        "organization": "State University of Mato Grosso",
+        "description": "I finished my Bachelor's degree in Computer Science."
+      }
+    ]
+  },
+  {
+    "year": "2023",
+    "events": [
+      {
+        "organization": "Exchange",
+        "description": "I went to Liverpool to study English."
+      },
+      {
+        "organization": "Ioasys",
+        "description": "I got a new job as Mid Backend Developer."
+      }
+    ]
+  },
+  {
+    "year": "2022",
+    "events": [
+      {
+        "organization": "Exchange",
+        "description": "I went to Liverpool to study English."
+      },
+      {
+        "organization": "Ioasys",
+        "description": "I got a new job as Mid Backend Developer."
+      }
+    ]
+  },
+  {
+    "year": "2021",
+    "events": [
+      {
+        "organization": "iClubs",
+        "description": "Effective as Backend Developer JR."
+      },
+      {
+        "organization": "Barralcool Group",
+        "description": "Effective as a Technology Analyst."
+      }
+    ]
+  },
+  {
+    "year": "2018",
+    "events": [
+      {
+        "description": "I decide to migrate to the area of software development and return to studies on programming."
+      },
+      {
+        "description": "I start to study about web development and develop some projects."
+      },
+      {
+        "organization": "Barralcool Group",
+        "description": "Efetivado como Assistente de Tecnologia."
+      }
+    ]
+  },
+  {
+    "year": "2016",
+    "events": [
+      {
+        "organization": "Barralcool Group",
+        "description": "Start of the IT internship"
+      }
+    ]
+  },
+  {
+    "year": "2015",
+    "events": [
+      {
+        "organization": "State University of Mato Grosso",
+        "description": "Admission to the Computer Science course."
+      },
+      {
+        "description": "I finish high school."
+      }
+    ]
+  },
+  {
+    "year": "2012",
+    "events": [
+      {
+        "organization": "Federal Institute of Education, Science and Technology of Mato Grosso",
+        "description": "Start the technical course in development. of systems integrated to High School."
+      }
+    ]
+  },
+  {
+    "year": "2006",
+    "events": [
+      {
+        "description": "First contact with computers!"
+      }
+    ]
+  },
+  {
+    "year": "1997",
+    "events": [
+      {
+        "description": "A developer was born!"
+      }
+    ]
+  }
+]
