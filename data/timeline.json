@@ -2,13 +2,13 @@
   {
     "year": "2025",
     "events": [
-        {
-        "organization": "Faculdade de Tecnologia Rocketseat",
-        "description": "I started a specialization in Artificial Intelligence."
-        },
+      {
+        "organization": "Rocketseat",
+        "description": "Started a specialization in Artificial Intelligence."
+      },
       {
         "organization": "State University of Mato Grosso",
-        "description": "I finished my Bachelor's degree in Computer Science."
+        "description": "Completed my Bachelor's degree in Computer Science."
       }
     ]
   },
@@ -17,11 +17,11 @@
     "events": [
       {
         "organization": "Exchange",
-        "description": "I went to Liverpool to study English."
+        "description": "Lived in Liverpool for an English immersion program."
       },
       {
         "organization": "Ioasys",
-        "description": "I got a new job as Mid Backend Developer."
+        "description": "Joined as a Mid Backend Developer."
       }
     ]
   },
@@ -30,11 +30,11 @@
     "events": [
       {
         "organization": "Exchange",
-        "description": "I went to Liverpool to study English."
+        "description": "Continued my English immersion experience in Liverpool."
       },
       {
         "organization": "Ioasys",
-        "description": "I got a new job as Mid Backend Developer."
+        "description": "Expanded my work on backend services and integrations."
       }
     ]
   },
@@ -43,11 +43,11 @@
     "events": [
       {
         "organization": "iClubs",
-        "description": "Effective as Backend Developer JR."
+        "description": "Worked as a Junior Backend Developer."
       },
       {
         "organization": "Barralcool Group",
-        "description": "Effective as a Technology Analyst."
+        "description": "Worked as a Technology Analyst."
       }
     ]
   },
@@ -55,14 +55,14 @@
     "year": "2018",
     "events": [
       {
-        "description": "I decide to migrate to the area of software development and return to studies on programming."
+        "description": "Decided to move into software development and return to programming studies."
       },
       {
-        "description": "I start to study about web development and develop some projects."
+        "description": "Started studying web development and building side projects."
       },
       {
         "organization": "Barralcool Group",
-        "description": "Efetivado como Assistente de Tecnologia."
+        "description": "Promoted to Technology Assistant."
       }
     ]
   },
@@ -71,7 +71,7 @@
     "events": [
       {
         "organization": "Barralcool Group",
-        "description": "Start of the IT internship"
+        "description": "Started my IT internship."
       }
     ]
   },
@@ -80,10 +80,10 @@
     "events": [
       {
         "organization": "State University of Mato Grosso",
-        "description": "Admission to the Computer Science course."
+        "description": "Started the Computer Science program."
       },
       {
-        "description": "I finish high school."
+        "description": "Completed high school."
       }
     ]
   },
@@ -92,7 +92,7 @@
     "events": [
       {
         "organization": "Federal Institute of Education, Science and Technology of Mato Grosso",
-        "description": "Start the technical course in development. of systems integrated to High School."
+        "description": "Started a technical course in systems development integrated with high school."
       }
     ]
   },
@@ -100,7 +100,7 @@
     "year": "2006",
     "events": [
       {
-        "description": "First contact with computers!"
+        "description": "First contact with computers."
       }
     ]
   },
@@ -108,7 +108,7 @@
     "year": "1997",
     "events": [
       {
-        "description": "A developer was born!"
+        "description": "Born in Brazil."
       }
     ]
   }

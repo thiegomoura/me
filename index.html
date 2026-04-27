@@ -11,7 +11,7 @@
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="shortcut icon" type="imagem/x-icon" href="favicon.ico" />
     <link href="styles.css" rel="stylesheet">
-    <title>Thiego.dev • Personal website</title>
+    <title>Thiego.dev • Backend Engineer Portfolio</title>
 </head>
 
 <body class=" d-flex flex-column align-content-around">
@@ -19,7 +19,7 @@
         <nav class="container navbar navbar-expand-lg">
             <a class="navbar-brand" href="./index.html">
                 <img src="./img/logo.svg" alt="Logo" class="rounded logo">
-                <span>Thiego's blog</span>
+                <span>Thiego Moura</span>
             </a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
@@ -30,10 +30,10 @@
                         <a class="nav-link" href="./projects.html">Projects</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#timeline">Timeline</a>
+                        <a class="nav-link" href="#timeline">Experience</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" disabled="true">Newspaper</a>
+                        <a class="nav-link" href="#" disabled="true">Writing</a>
                     </li>
                 </ul>
             </div>
@@ -48,126 +48,129 @@
         </nav>
     </header>
     <main class="container py-3">
-        <div id="profile" class="d-flex flex-column align-items-center">
-            <img class="profile-image" src="./img/th.jpg">
-            <div class="d-flex flex-column text-center">
-                <h4><strong>Thiego</strong> R. Moura</h4>
-                <ul class="list-unstyled">
-                    <li>A Brazilian Software Developer 💻</li>
-                    <li>Computer Scientist 🧪</li>
-                </ul>
-                <a href="http://github.com/thiegomoura" target="_blank">
-                    <i class="bi bi-github"></i>
-                    <span>Github</span>
-                </a>
-                <a href="https://www.linkedin.com/in/thiegomoura/" target="_blank">
-                    <i class="bi bi-linkedin"></i>
-                    <span>Linkedin</span>
-                </a>
-                <a href="mailto:thi-ego@hotmail.com">
-                    <i class="bi bi-envelope"></i>
-                    <span>thi-ego@hotmail.com</span>
-                </a>
-                <a class="btn-secondary d-lg-none rounded p-2 mt-3" href="./docs/cv.pdf"
-                    download="thiego-moura-curriculo">
-                    <span>Download CV</span>
-                    <i class="bi bi-cloud-download"></i>
-                </a>
-                </ul>
-            </div>
-        </div>
-        <div id="about" class="my-4 p-3 card">
-            <p>Welcome to my personal blog project! I'm Thiego Moura, a backend developer specialized in Node.js, TypeScript, and cloud technologies. This space was created to share insights, experiments, and personal interests related to software development. It also serves as a hands-on environment to practice web technologies and improve my English communication skills. Thanks for stopping by and feel free to explore!</p>
-        </div>
-        <section id="skills" class="">
-  <h3 class="title text-center pb-4">Skills</h3>
-  <div class="row g-4">
-    <!-- Linguagens -->
-    <div class="col-md-6">
-      <h5 class="text-muted">Languages</h5>
-      <div class="mb-3">
-        <label>JavaScript</label>
-        <div class="progress">
-          <div class="progress-bar bg-success" style="width: 95%;">95%</div>
-        </div>
-      </div>
-      <div class="mb-3">
-        <label>TypeScript</label>
-        <div class="progress">
-          <div class="progress-bar bg-success" style="width: 92%;">92%</div>
-        </div>
-      </div>
-      <div class="mb-3">
-        <label>HTML</label>
-        <div class="progress">
-          <div class="progress-bar bg-info" style="width: 90%;">90%</div>
-        </div>
-      </div>
-      <div class="mb-3">
-        <label>CSS</label>
-        <div class="progress">
-          <div class="progress-bar bg-info" style="width: 80%;">80%</div>
-        </div>
-      </div>
-      <div class="mb-3">
-        <label>Python</label>
-        <div class="progress">
-          <div class="progress-bar bg-warning" style="width: 60%;">60%</div>
-        </div>
-      </div>
-      <div class="mb-3">
-        <label>Shell Script</label>
-        <div class="progress">
-          <div class="progress-bar bg-warning" style="width: 55%;">55%</div>
-        </div>
-      </div>
-    </div>
+        <section id="profile" class="hero">
+          <img class="profile-image" src="./img/th.jpg" alt="Thiego Moura">
+          <div class="hero-content">
+            <h1 class="hero-title" align="left">Hey 👋 Welcome to my profile!</h1>
 
-    <div class="col-md-6">
-      <h5 class="text-muted">Frameworks, Tools e DevOps</h5>
-      <div class="mb-3">
-        <label>Node.js / Express / Nest.js</label>
-        <div class="progress">
-          <div class="progress-bar bg-success" style="width: 95%;">95%</div>
-        </div>
-      </div>
-      <div class="mb-3">
-        <label>AWS (EC2, Lambda, S3, DynamoDB)</label>
-        <div class="progress">
-          <div class="progress-bar bg-primary" style="width: 85%;">85%</div>
-        </div>
-      </div>
-      <div class="mb-3">
-        <label>PostgreSQL / MongoDB</label>
-        <div class="progress">
-          <div class="progress-bar bg-primary" style="width: 85%;">85%</div>
-        </div>
-      </div>
-      <div class="mb-3">
-        <label>Docker</label>
-        <div class="progress">
-          <div class="progress-bar bg-primary" style="width: 75%;">75%</div>
-        </div>
-      </div>
-      <div class="mb-3">
-        <label>Git / GitHub / GitLab / CodeCommit</label>
-        <div class="progress">
-          <div class="progress-bar bg-secondary" style="width: 90%;">90%</div>
-        </div>
-      </div>
-      <div class="mb-3">
-        <label>CI/CD (GitHub Actions, GitLab CI, CodePipeline)</label>
-        <div class="progress">
-          <div class="progress-bar bg-secondary" style="width: 80%;">80%</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+            <p class="hero-intro" align="left">My name is Thiego and I'm a Backend Software Engineer from Mato Grosso, Brazil.</p>
+
+            <h2 class="hero-section-title" align="left">About me</h2>
+
+            <div class="hero-about" align="left">
+              <p>✨ Creating bugs since 2018.</p>
+              <p>💻 5+ years building backend solutions with Node.js, Nest.js, and TypeScript.</p>
+              <p>☁️ I focus on scalable systems, Clean Architecture, DDD, and cloud environments like AWS and Azure.</p>
+              <p>📚 I'm currently studying AI and Automation, while improving my English for global communication.</p>
+              <p>🎯 Goal: grow as a backend engineer in international teams.</p>
+            </div>
+
+            <h2 class="hero-section-title" align="left">I code with</h2>
+
+            <div class="hero-stack" align="left">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" height="40" alt="javascript logo" />
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" height="40" alt="typescript logo" />
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" height="40" alt="nodejs logo" />
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg" height="40" alt="nestjs logo" />
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" height="40" alt="express logo" />
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" height="40" alt="aws logo" />
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" height="40" alt="azure logo" />
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" height="40" alt="docker logo" />
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" height="40" alt="postgresql logo" />
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jest/jest-plain.svg" height="40" alt="jest logo" />
+            </div>
+
+            <div class="hero-actions d-flex flex-wrap justify-content-center">
+              <a class="btn btn-secondary" href="./docs/cv.pdf" download="thiego-moura-curriculo">
+                <span>Download CV</span>
+                <i class="bi bi-cloud-download"></i>
+              </a>
+              <a class="btn btn-outline-light" href="#projects">
+                <span>View Projects</span>
+                <i class="bi bi-arrow-down"></i>
+              </a>
+            </div>
+
+            <ul class="hero-social list-unstyled d-flex flex-wrap justify-content-center">
+              <li>
+                <a href="http://github.com/thiegomoura" target="_blank" rel="noopener noreferrer">
+                  <i class="bi bi-github"></i>
+                  <span>GitHub</span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.linkedin.com/in/thiegomoura/" target="_blank" rel="noopener noreferrer">
+                  <i class="bi bi-linkedin"></i>
+                  <span>LinkedIn</span>
+                </a>
+              </li>
+              <li>
+                <a href="mailto:thi-ego@hotmail.com">
+                  <i class="bi bi-envelope"></i>
+                  <span>Email</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </section>
+        <section id="skills" class="skill-section">
+          <h3 class="title text-center pb-4">Skills</h3>
+          <div class="skill-summary card">
+            <p class="skill-summary__text">A practical snapshot of the areas I use most often in backend work, cloud delivery, and day-to-day collaboration.</p>
+            <p class="skill-summary__note">Strong focus: backend architecture, APIs, databases, and cloud-native delivery.</p>
+          </div>
+
+          <div class="row g-4 mt-3 skill-grid">
+            <div class="col-md-4">
+              <div class="skill-group card h-100">
+                <h5 class="text-muted">Core Languages</h5>
+                <p class="skill-level">Daily use</p>
+                <div class="skill-tags">
+                  <span class="skill-tag">JavaScript</span>
+                  <span class="skill-tag">TypeScript</span>
+                  <span class="skill-tag">Node.js</span>
+                  <span class="skill-tag">Shell</span>
+                  <span class="skill-tag">Python</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="skill-group card h-100">
+                <h5 class="text-muted">Backend & APIs</h5>
+                <p class="skill-level">Primary stack</p>
+                <div class="skill-tags">
+                  <span class="skill-tag">Nest.js</span>
+                  <span class="skill-tag">Express</span>
+                  <span class="skill-tag">REST APIs</span>
+                  <span class="skill-tag">Clean Architecture</span>
+                  <span class="skill-tag">DDD</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="skill-group card h-100">
+                <h5 class="text-muted">Cloud, Data & Delivery</h5>
+                <p class="skill-level">Hands-on experience</p>
+                <div class="skill-tags">
+                  <span class="skill-tag">AWS</span>
+                  <span class="skill-tag">Azure</span>
+                  <span class="skill-tag">PostgreSQL</span>
+                  <span class="skill-tag">MongoDB</span>
+                  <span class="skill-tag">Docker</span>
+                  <span class="skill-tag">CI/CD</span>
+                  <span class="skill-tag">Git</span>
+                  <span class="skill-tag">Jest</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
         
         <div id="projects">
-            <h3 class="title text-center pt-3">Projects</h3>
+            <h3 class="title text-center pt-3">Selected Projects</h3>
             <div class="row">
                 <div class="col-md-4 p-2">
                     <div class="border rounded p-3">
@@ -178,8 +181,7 @@
                                 <li><span class="badge bg-secondary text-nowrap">Wordpress</span></li>
                                 <li><span class="badge bg-secondary text-nowrap ml-1">Bootstrap</span></li>
                             </ul>
-                            <span class="text-muted text-monospace">Redesign of the institutional website developed for
-                                Rotaract Brazil Organization.</span>
+                            <span class="text-muted text-monospace">Institutional website redesign for Rotaract Brasil, focused on a cleaner layout, stronger readability, and a more professional presentation.</span>
                         </div>
                         <div class="card-links d-flex justify-content-around">
                             <a href="http://rotaractbrasil.org.br" target="_blank" rel="noopener noreferrer">
@@ -197,8 +199,7 @@
                                 <li><span class="badge bg-secondary text-nowrap">Wordpress</span></li>
                                 <li><span class="badge bg-secondary text-nowrap ml-1">Bootstrap</span></li>
                             </ul>
-                            <span class="text-muted text-monospace">Redesign of the institutional website developed for
-                                Grupo Barralcool, changing the layout to something modern and clean.</span>
+                            <span class="text-muted text-monospace">Corporate website redesign for Grupo Barralcool, with a modern visual system and improved content hierarchy.</span>
                         </div>
                         <div class="card-links d-flex justify-content-around">
                             <a href="http://barralcool.com.br" target="_blank" rel="noopener noreferrer">
@@ -218,9 +219,7 @@
                                 <li><span class="badge bg-secondary text-nowrap ml-1">HTML5</span></li>
                                 <li><span class="badge bg-secondary text-nowrap ml-1">CSS3</span></li>
                             </ul>
-                            <span class="text-muted text-monospace">Website responsive developed for the national event,
-                                based in
-                                Cuiabá - Mato Grosso.</span>
+                            <span class="text-muted text-monospace">Responsive event website developed for a national conference in Cuiabá, Mato Grosso, with a lightweight and accessible layout.</span>
                         </div>
                         <div class="card-links d-flex justify-content-around">
                             <a href="https://github.com/thiegomoura/conarc-2019.git" target="_blank"
@@ -237,12 +236,12 @@
             </div>
             <div class="text-center py-3">
                 <a href="./projects.html" class="btn btn-secondary">
-                  See all
+                  View all projects
                 </a>
             </div>
         </div>
         <div id="timeline">
-            <h3 class="title text-center py-3">Timeline</h3>
+            <h3 class="title text-center py-3">Experience Timeline</h3>
             <!-- Content generated by script  -->
         </div>
     </main>
@@ -254,7 +253,7 @@
     <footer class="footer mt-auto py-4 px-3 text-center">
       <div class="container d-flex flex-column align-items-center">
         <img src="./img/logo-dark.svg" alt="Logo TM" class="logo-footer mb-3" />
-        <span class="footer-text">&copy; TM 2025 – All rights reserved.</span>
+        <span class="footer-text">&copy; TM 2026 – All rights reserved.</span>
       </div>
     </footer>
 </body>

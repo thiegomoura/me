@@ -50,13 +50,17 @@ function toggleTheme() {
         setTheme("theme-light");
     }
 
-    fetch("../data/timeline.json")
+    fetch("./data/timeline.json")
         .then((response) => response.json())
         .then((timeline) => {
             const timelineContainer = document.getElementById("timeline");
+            if (!timelineContainer) {
+                return;
+            }
+
             timeline.forEach(({ year, events }) => {
                 const card = document.createElement("div");
-                card.className = "card bg-light p-1 text-center";
+                card.className = "card timeline-card";
 
                 const step = document.createElement("div");
                 step.className = "step";
@@ -65,7 +69,7 @@ function toggleTheme() {
                 stepNumber.className = "step-number";
 
                 const yearSpan = document.createElement("span");
-                yearSpan.className = "data-step text-muted";
+                yearSpan.className = "data-step timeline-year";
                 yearSpan.innerText = year;
 
                 stepNumber.appendChild(yearSpan);
@@ -86,6 +90,9 @@ function toggleTheme() {
                 card.appendChild(step);
                 timelineContainer.appendChild(card);
             });
+        })
+        .catch((error) => {
+            console.error("Failed to load timeline data:", error);
         });
 })();
 
