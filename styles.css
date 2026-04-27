@@ -545,6 +545,28 @@ section,
     background: rgba(52, 211, 153, 0.12);
 }
 
+.project-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.project-card img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+.project-card .card-title {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.project-card .card-links {
+    margin-top: auto;
+}
+
 #timeline {
     max-width: 840px;
     margin: 0 auto 4.5rem;

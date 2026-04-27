@@ -15,36 +15,29 @@
 </head>
 
 <body class=" d-flex flex-column align-content-around">
-    <header>
+    <header class="position-fixed w-100">
         <nav class="container navbar navbar-expand-lg">
             <a class="navbar-brand" href="./index.html">
                 <img src="./img/logo.svg" alt="Logo" class="rounded logo">
-                <span>Thiego's blog</span>
+                <span>Thiego Moura</span>
             </a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#about">About</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="./projects.html">Projects</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/index.html#timeline">Timeline</a>
+                        <a class="nav-link" href="/index.html#timeline">Experience</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Newspaper</a>
+                        <a class="nav-link" href="#" disabled="true">Writing</a>
                     </li>
                 </ul>
             </div>
-            <a id="theme" class="px-4 ml-auto">
-                <i class="bi" onclick="toggleTheme()"></i>
-            </a>
-            <a class="btn-secondary d-none d-lg-block rounded p-2" href="./docs/cv.pdf"
-                download="thiego-moura-curriculo">
-                <span>Download CV</span>
-                <i class="bi bi-cloud-download"></i>
-            </a>
+            <button id="theme" type="button" class="theme-toggle px-4 ml-auto" aria-label="Toggle theme"
+                title="Toggle theme" onclick="toggleTheme()">
+                <i class="bi" aria-hidden="true"></i>
+            </button>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="bi bi-list"></i>
@@ -70,7 +63,7 @@
             </div>
             <div class="row">
                 <div class="col-md-4 p-2">
-                    <div class="border rounded p-3">
+                    <div class="border rounded p-3 project-card h-100">
                         <img src="./img/projects/rotaract.png" alt="Website Grupo Barralcool" class="w-100 rounded">
                         <div class="card-title text-center">
                             <h5 class="pt-3">Rotaract Brasil</h5>
@@ -89,7 +82,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 p-2">
-                    <div class="border rounded p-3">
+                    <div class="border rounded p-3 project-card h-100">
                         <img src="./img/projects/barralcool.png" alt="Website Grupo Barralcool" class="w-100 rounded">
                         <div class="card-title text-center">
                             <h5 class="pt-3">Grupo Barralcool</h5>
@@ -108,7 +101,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 p-2">
-                    <div class="border rounded p-3">
+                    <div class="border rounded p-3 project-card h-100">
                         <img src="./img/projects/conarc-da-transformacao.png" alt="Website Grupo Barralcool"
                             class="w-100 rounded">
                         <div class="card-title text-center">
