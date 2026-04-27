@@ -293,8 +293,8 @@ section,
 }
 
 #profile .profile-image {
-    width: 136px;
-    height: 136px;
+    width: 160px;
+    height: 160px;
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid rgba(34, 197, 94, 0.35);
@@ -338,15 +338,38 @@ section,
 }
 
 .hero-about {
-    display: grid;
-    gap: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
     max-width: 900px;
     color: var(--font-muted);
     line-height: 1.78;
+    padding-left: 0;
 }
 
-.hero-about p {
+.hero-about li {
     margin: 0;
+    list-style: none;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.65rem 0;
+    position: relative;
+    padding-left: 1.4rem;
+}
+
+.hero-about li::before {
+    /* rounded vertical indicator */
+    content: '';
+    position: absolute;
+    left: 0.2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 64%;
+    background: linear-gradient(180deg, rgba(52, 211, 153, 0.95), rgba(34, 197, 94, 0.85));
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(34, 197, 94, 0.06);
 }
 
 .hero-stack {
@@ -712,8 +735,8 @@ section,
     }
 
     #profile .profile-image {
-        width: 112px;
-        height: 112px;
+        width: 128px;
+        height: 128px;
     }
 
     .hero-content {
