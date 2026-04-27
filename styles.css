@@ -226,7 +226,7 @@ section,
     gap: 1.4rem;
     margin: 2rem auto 0;
     padding: 2.5rem 2rem;
-    max-width: 980px;
+    max-width: 1120px;
     border: 1px solid var(--border-color);
     border-radius: 1.75rem;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent), var(--surface-color);
@@ -568,7 +568,7 @@ section,
 }
 
 #timeline {
-    max-width: 840px;
+    max-width: 1120px;
     margin: 0 auto 4.5rem;
 }
 
