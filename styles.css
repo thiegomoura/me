@@ -464,6 +464,8 @@ section,
 .project-intro__stack {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
     gap: 0.6rem;
     margin-top: 1.35rem;
 }
