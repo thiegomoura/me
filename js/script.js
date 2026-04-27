@@ -1,5 +1,63 @@
 const icon = document.querySelector("#theme i");
 const themeToggle = document.querySelector("#theme");
+const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+).matches;
+let revealObserver = null;
+
+function getRevealObserver() {
+    if (prefersReducedMotion || revealObserver) {
+        return revealObserver;
+    }
+
+    if (!("IntersectionObserver" in window)) {
+        return null;
+    }
+
+    revealObserver = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("reveal-visible");
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        },
+        {
+            root: null,
+            threshold: 0.12,
+            rootMargin: "0px 0px -8% 0px",
+        },
+    );
+
+    return revealObserver;
+}
+
+function registerReveal(selector) {
+    const elements = document.querySelectorAll(selector);
+    if (!elements.length) {
+        return;
+    }
+
+    const observer = getRevealObserver();
+
+    elements.forEach((el, index) => {
+        if (el.dataset.revealReady === "true") {
+            return;
+        }
+
+        el.dataset.revealReady = "true";
+        el.classList.add("reveal");
+        el.style.setProperty("--reveal-delay", `${Math.min(index, 6) * 70}ms`);
+
+        if (prefersReducedMotion || !observer) {
+            el.classList.add("reveal-visible");
+            return;
+        }
+
+        observer.observe(el);
+    });
+}
 
 function setThemeIcon(themeName) {
     if (!icon) {
@@ -50,6 +108,10 @@ function toggleTheme() {
         setTheme("theme-light");
     }
 
+    registerReveal(
+        "#profile, #skills .skill-summary, #skills .skill-group, #projects .project-intro, #projects .project-card, #timeline .title",
+    );
+
     fetch("./data/timeline.json")
         .then((response) => response.json())
         .then((timeline) => {
@@ -90,6 +152,8 @@ function toggleTheme() {
                 card.appendChild(step);
                 timelineContainer.appendChild(card);
             });
+
+            registerReveal("#timeline .timeline-card");
         })
         .catch((error) => {
             console.error("Failed to load timeline data:", error);
