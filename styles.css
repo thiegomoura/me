@@ -117,6 +117,64 @@ header .navbar {
     box-shadow: 0 0 0 0.2rem rgba(52, 211, 153, 0.18);
 }
 
+@media (max-width: 991.98px) {
+    header .navbar {
+        position: relative;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        align-items: center;
+    }
+
+    .navbar-brand {
+        order: 1;
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+
+    .navbar-brand span {
+        display: none;
+    }
+
+    .theme-toggle {
+        order: 2;
+        margin-left: auto;
+        flex: 0 0 auto;
+    }
+
+    .navbar-toggler {
+        order: 3;
+        flex: 0 0 auto;
+        margin-left: 0.25rem;
+    }
+
+    .navbar-collapse {
+        order: 4;
+        position: absolute;
+        top: calc(100% + 0.5rem);
+        left: 0;
+        right: 0;
+        padding: 0.9rem;
+        border: 1px solid var(--border-color);
+        border-radius: 1rem;
+        background: var(--surface-color);
+        box-shadow: 0 18px 40px var(--shadow-color);
+        z-index: 1000;
+    }
+
+    .navbar-nav {
+        width: 100%;
+        gap: 0.35rem;
+    }
+
+    .navbar-nav .nav-link {
+        display: block;
+        width: 100%;
+        padding: 0.75rem 0.9rem;
+        border-radius: 0.75rem;
+        background: transparent;
+    }
+}
+
 .theme-toggle {
     display: inline-flex;
     align-items: center;
