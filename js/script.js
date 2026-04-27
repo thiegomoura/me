@@ -1,19 +1,42 @@
 const icon = document.querySelector("#theme i");
+const themeToggle = document.querySelector("#theme");
+
+function setThemeIcon(themeName) {
+    if (!icon) {
+        return;
+    }
+
+    icon.className =
+        themeName === "theme-dark"
+            ? "bi bi-cloud-moon-fill"
+            : "bi bi-cloud-sun-fill";
+}
+
+function setThemeToggleLabel(themeName) {
+    if (!themeToggle) {
+        return;
+    }
+
+    const label =
+        themeName === "theme-dark"
+            ? "Switch to light theme"
+            : "Switch to dark theme";
+    themeToggle.setAttribute("aria-label", label);
+    themeToggle.setAttribute("title", label);
+}
 
 function setTheme(themeName) {
     localStorage.setItem("theme", themeName);
     document.documentElement.className = themeName;
+    setThemeIcon(themeName);
+    setThemeToggleLabel(themeName);
 }
 
 function toggleTheme() {
     if (localStorage.getItem("theme") === "theme-dark") {
         setTheme("theme-light");
-        icon.removeAttribute("bi-cloud-moon-fill");
-        icon.setAttribute("class", "bi-cloud-sun-fill");
     } else {
         setTheme("theme-dark");
-        icon.removeAttribute("bi-cloud-sun-fill");
-        icon.setAttribute("class", "bi-cloud-moon-fill");
     }
 }
 
@@ -23,10 +46,8 @@ function toggleTheme() {
         !localStorage.getItem("theme")
     ) {
         setTheme("theme-dark");
-        icon.setAttribute("class", "bi-cloud-moon-fill");
     } else {
         setTheme("theme-light");
-        icon.setAttribute("class", "bi-cloud-sun-fill");
     }
 
     fetch("../data/timeline.json")
@@ -77,3 +98,4 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         });
     });
 });
+
