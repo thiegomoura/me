@@ -29,11 +29,7 @@
     "year": "2022",
     "events": [
       {
-        "organization": "Exchange",
-        "description": "Continued my English immersion experience in Liverpool."
-      },
-      {
-        "organization": "Ioasys",
+        "organization": "iClubs",
         "description": "Expanded my work on backend services and integrations."
       }
     ]
