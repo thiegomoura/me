@@ -70,6 +70,27 @@ function setThemeIcon(themeName) {
             : "bi bi-cloud-sun-fill";
 }
 
+function setLogo(themeName) {
+    try {
+        const headerLogo = document.getElementById("site-logo");
+        const footerLogo = document.getElementById("site-logo-footer");
+
+        if (headerLogo) {
+            const dark = headerLogo.getAttribute("data-logo-dark");
+            const light = headerLogo.getAttribute("data-logo-light");
+            headerLogo.src =
+                themeName === "theme-dark" ? light || dark : dark || light;
+        }
+
+        if (footerLogo) {
+            const dark = footerLogo.getAttribute("data-logo-dark");
+            const light = footerLogo.getAttribute("data-logo-light");
+            footerLogo.src =
+                themeName === "theme-dark" ? light || dark : dark || light;
+        }
+    } catch (e) {}
+}
+
 function setThemeToggleLabel(themeName) {
     if (!themeToggle) {
         return;
@@ -88,6 +109,7 @@ function setTheme(themeName) {
     document.documentElement.className = themeName;
     setThemeIcon(themeName);
     setThemeToggleLabel(themeName);
+    setLogo(themeName);
 }
 
 function toggleTheme() {
