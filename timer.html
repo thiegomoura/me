@@ -562,6 +562,22 @@
                     "title",
                     isFullMode ? "Pressione ESC para sair do modo full" : "",
                 );
+
+                if (isFullMode) {
+                    if (document.documentElement.requestFullscreen) {
+                        document.documentElement
+                            .requestFullscreen()
+                            .catch((err) => {
+                                console.warn(
+                                    `Erro ao tentar tela cheia: ${err.message}`,
+                                );
+                            });
+                    }
+                } else {
+                    if (document.fullscreenElement) {
+                        document.exitFullscreen();
+                    }
+                }
             }
 
             function isTypingContext(element) {
