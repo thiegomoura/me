@@ -1,0 +1,761 @@
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Cronômetro</title>
+        <style>
+            :root {
+                --bg: #ffffff;
+                --text: #ffffff;
+                --muted: #cbd5e1;
+                --panel: rgba(255, 255, 255, 0.08);
+                --border: rgba(255, 255, 255, 0.16);
+                --accent: #22c55e;
+                --accent-hover: #16a34a;
+                --danger: #ef4444;
+                --danger-hover: #dc2626;
+            }
+
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+                font-family:
+                    Inter,
+                    -apple-system,
+                    BlinkMacSystemFont,
+                    "Segoe UI",
+                    Roboto,
+                    sans-serif;
+            }
+
+            body {
+                min-height: 100vh;
+                background: var(--bg);
+                color: var(--text);
+                display: grid;
+                grid-template-rows: auto 1fr auto;
+                gap: 16px;
+                padding: 20px;
+                transition: background-color 0.2s ease;
+            }
+
+            body.full-mode {
+                grid-template-rows: 1fr;
+                gap: 0;
+                padding: 0;
+            }
+
+            .config {
+                width: min(980px, 100%);
+                margin: 0 auto;
+                background: #1f2937;
+                border: 1px solid var(--border);
+                border-radius: 14px;
+                padding: 14px;
+                display: grid;
+                gap: 10px;
+            }
+
+            .config h1 {
+                font-size: 1.1rem;
+                font-weight: 700;
+            }
+
+            .shortcut-box {
+                margin-top: 4px;
+                padding: 10px 12px;
+                border: 1px solid var(--border);
+                border-radius: 10px;
+                background: rgba(255, 255, 255, 0.06);
+                color: var(--muted);
+                font-size: 0.9rem;
+                display: grid;
+                gap: 6px;
+            }
+
+            .shortcut-box strong {
+                color: #e2e8f0;
+            }
+
+            .shortcut-list {
+                list-style: none;
+                display: grid;
+                gap: 4px;
+            }
+
+            .shortcut-key {
+                display: inline-block;
+                min-width: 22px;
+                text-align: center;
+                font-weight: 700;
+                color: #ffffff;
+                background: rgba(255, 255, 255, 0.14);
+                border: 1px solid var(--border);
+                border-radius: 6px;
+                padding: 1px 6px;
+                margin-right: 6px;
+            }
+
+            .fields {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+                gap: 10px;
+                align-items: end;
+            }
+
+            .field {
+                display: grid;
+                gap: 6px;
+            }
+
+            label {
+                color: var(--muted);
+                font-size: 0.9rem;
+            }
+
+            input,
+            button {
+                border: 1px solid var(--border);
+                border-radius: 10px;
+                font-size: 0.95rem;
+            }
+
+            input[type="number"],
+            input[type="color"],
+            input[type="file"] {
+                width: 100%;
+                padding: 10px;
+                background: rgba(255, 255, 255, 0.08);
+                color: var(--text);
+            }
+
+            input[type="file"] {
+                padding: 8px;
+            }
+
+            input[type="color"] {
+                min-height: 42px;
+                padding: 4px;
+            }
+
+            .btn {
+                background: var(--accent);
+                color: #052e16;
+                font-weight: 700;
+                cursor: pointer;
+                padding: 10px 14px;
+                border: none;
+            }
+
+            .btn:hover {
+                background: var(--accent-hover);
+            }
+
+            .btn-danger {
+                background: var(--danger);
+                color: #ffffff;
+            }
+
+            .btn-danger:hover {
+                background: var(--danger-hover);
+            }
+
+            .logo-input-row {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+            .logo-input-row input[type="file"] {
+                flex: 1;
+            }
+
+            .icon-btn {
+                width: 42px;
+                height: 42px;
+                border: 1px solid var(--border);
+                border-radius: 10px;
+                background: rgba(255, 255, 255, 0.08);
+                color: #ffffff;
+                font-size: 1.1rem;
+                cursor: pointer;
+                display: grid;
+                place-items: center;
+            }
+
+            .icon-btn:hover {
+                background: rgba(255, 255, 255, 0.18);
+            }
+
+            .stage {
+                display: grid;
+                place-items: center;
+            }
+
+            .display {
+                width: min(980px, 100%);
+                min-height: 48vh;
+                border-radius: 18px;
+                display: grid;
+                grid-template-rows: 1fr auto;
+                align-items: stretch;
+                justify-items: center;
+                padding: 18px;
+                text-align: center;
+            }
+
+            .display-content {
+                width: 100%;
+                height: 100%;
+                position: relative;
+                display: grid;
+                place-items: center;
+            }
+
+            body.full-mode .config {
+                display: none;
+            }
+
+            body.full-mode .stage {
+                min-height: 100vh;
+            }
+
+            body.full-mode .display {
+                width: 100vw;
+                min-height: 100vh;
+                border: none;
+                border-radius: 0;
+                background: transparent;
+            }
+
+            #logoPreview {
+                max-width: 380px;
+                max-height: 380px;
+                width: auto;
+                height: auto;
+                object-fit: contain;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, calc(-50% - 210px));
+                display: none;
+            }
+
+            #time {
+                font-size: clamp(3rem, 11vw, 8rem);
+                font-weight: 800;
+                letter-spacing: 2px;
+                line-height: 1;
+                font-variant-numeric: tabular-nums;
+                text-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+            }
+
+            body.full-mode #time {
+                font-size: clamp(5rem, 22vw, 25rem);
+            }
+
+            body.full-mode #logoPreview {
+                transform: translate(-50%, calc(-50% - 210px));
+            }
+
+            body.full-mode .controls {
+                position: absolute;
+                bottom: 8%;
+                left: 50%;
+                transform: translateX(-50%);
+                margin-top: 0;
+                z-index: 10;
+            }
+
+            .controls {
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+                margin-top: 10px;
+            }
+
+            .controls button {
+                width: 54px;
+                height: 54px;
+                border: none;
+                border-radius: 999px;
+                font-size: 1.35rem;
+                font-weight: 700;
+                display: grid;
+                place-items: center;
+                cursor: pointer;
+            }
+
+            #playPauseBtn {
+                background: var(--accent);
+                color: #052e16;
+            }
+
+            #playPauseBtn:hover {
+                background: var(--accent-hover);
+            }
+
+            #resetBtn {
+                background: var(--danger);
+                color: #fff;
+            }
+
+            #resetBtn:hover {
+                background: var(--danger-hover);
+            }
+        </style>
+    </head>
+    <body>
+        <section class="config">
+            <h1>Configuração do Timer</h1>
+            <div class="fields">
+                <div class="field">
+                    <label for="minutesInput">Tempo (minutos)</label>
+                    <input id="minutesInput" type="number" min="0" value="5" />
+                </div>
+
+                <div class="field">
+                    <label for="secondsInput">Tempo (segundos)</label>
+                    <input
+                        id="secondsInput"
+                        type="number"
+                        min="0"
+                        max="59"
+                        value="0"
+                    />
+                </div>
+
+                <div class="field">
+                    <label for="bgColorInput">Cor de fundo</label>
+                    <input id="bgColorInput" type="color" value="#ffffff" />
+                </div>
+
+                <div class="field">
+                    <label for="fontColorInput">Cor da fonte</label>
+                    <input id="fontColorInput" type="color" value="#111827" />
+                </div>
+
+                <div class="field">
+                    <label for="logoInput">Logo PNG (opcional)</label>
+                    <div class="logo-input-row">
+                        <input id="logoInput" type="file" accept="image/png" />
+                        <button
+                            id="removeLogoBtn"
+                            class="icon-btn"
+                            type="button"
+                            aria-label="Remover logo"
+                            title="Remover logo"
+                        >
+                            🗑
+                        </button>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <button
+                        id="resetConfigBtn"
+                        class="btn btn-danger"
+                        type="button"
+                        aria-label="Resetar configurações"
+                        title="Resetar configurações"
+                    >
+                        ↻
+                    </button>
+                </div>
+
+                <button
+                    id="saveConfigBtn"
+                    class="btn"
+                    type="button"
+                    aria-label="Salvar configuração"
+                    title="Salvar configuração"
+                >
+                    💾
+                </button>
+            </div>
+
+            <section class="shortcut-box" aria-label="Atalhos de teclado">
+                <strong>Atalhos</strong>
+                <ul class="shortcut-list">
+                    <li><span class="shortcut-key">1</span>Play/Pause</li>
+                    <li><span class="shortcut-key">2</span>Reset</li>
+                    <li><span class="shortcut-key">3</span>Modo Full</li>
+                </ul>
+            </section>
+        </section>
+
+        <main class="stage">
+            <section class="display" aria-live="polite">
+                <div class="display-content">
+                    <img id="logoPreview" alt="Logo configurada" />
+                    <div id="time">05:00</div>
+                    <section class="controls">
+                        <button
+                            id="playPauseBtn"
+                            type="button"
+                            aria-label="Play"
+                            title="Play"
+                        >
+                            ▶
+                        </button>
+                        <button
+                            id="resetBtn"
+                            type="button"
+                            aria-label="Reset"
+                            title="Reset"
+                        >
+                            ↺
+                        </button>
+                        <button
+                            id="fullModeBtn"
+                            type="button"
+                            aria-label="Modo Full"
+                            title="Modo Full"
+                        >
+                            ⛶
+                        </button>
+                    </section>
+                </div>
+            </section>
+        </main>
+
+        <script>
+            const STORAGE_KEY = "timerConfigV1";
+            const DEFAULT_DURATION_SECONDS = 3 * 60;
+            const DEFAULT_BG_COLOR = "#ffffff";
+            const DEFAULT_FONT_COLOR = "#111827";
+            const ICON_PLAY = "▶";
+            const ICON_PAUSE = "⏸";
+            const ICON_RESET = "↺";
+            const ICON_FULL = "⛶";
+            const ICON_EXIT_FULL = "⛶";
+
+            const minutesInput = document.getElementById("minutesInput");
+            const secondsInput = document.getElementById("secondsInput");
+            const bgColorInput = document.getElementById("bgColorInput");
+            const fontColorInput = document.getElementById("fontColorInput");
+            const logoInput = document.getElementById("logoInput");
+            const removeLogoBtn = document.getElementById("removeLogoBtn");
+            const resetConfigBtn = document.getElementById("resetConfigBtn");
+            const saveConfigBtn = document.getElementById("saveConfigBtn");
+            const playPauseBtn = document.getElementById("playPauseBtn");
+            const resetBtn = document.getElementById("resetBtn");
+            const fullModeBtn = document.getElementById("fullModeBtn");
+            const timeEl = document.getElementById("time");
+            const logoPreview = document.getElementById("logoPreview");
+
+            let intervalId = null;
+            let isRunning = false;
+            let durationSeconds = DEFAULT_DURATION_SECONDS;
+            let remainingSeconds = durationSeconds;
+            let logoDataUrl = "";
+            let fontColor = DEFAULT_FONT_COLOR;
+            let isFullMode = false;
+
+            function formatTime(totalSeconds) {
+                const safe = Math.max(0, totalSeconds);
+                const mins = Math.floor(safe / 60);
+                const secs = safe % 60;
+                return (
+                    String(mins).padStart(2, "0") +
+                    ":" +
+                    String(secs).padStart(2, "0")
+                );
+            }
+
+            function updateTime() {
+                timeEl.textContent = formatTime(remainingSeconds);
+            }
+
+            function stopTimer() {
+                if (intervalId) {
+                    clearInterval(intervalId);
+                    intervalId = null;
+                }
+                isRunning = false;
+                playPauseBtn.textContent = ICON_PLAY;
+                playPauseBtn.setAttribute("aria-label", "Play");
+                playPauseBtn.setAttribute("title", "Play");
+            }
+
+            function startTimer() {
+                if (isRunning || remainingSeconds <= 0) return;
+                isRunning = true;
+                playPauseBtn.textContent = ICON_PAUSE;
+                playPauseBtn.setAttribute("aria-label", "Pause");
+                playPauseBtn.setAttribute("title", "Pause");
+
+                intervalId = setInterval(() => {
+                    if (remainingSeconds > 0) {
+                        remainingSeconds -= 1;
+                        updateTime();
+                    }
+
+                    if (remainingSeconds <= 0) {
+                        stopTimer();
+                    }
+                }, 1000);
+            }
+
+            function applyLogo(src) {
+                if (src) {
+                    logoPreview.src = src;
+                    logoPreview.style.display = "block";
+                } else {
+                    logoPreview.removeAttribute("src");
+                    logoPreview.style.display = "none";
+                }
+            }
+
+            function hexToRgb(hex) {
+                const normalized = String(hex || "")
+                    .trim()
+                    .replace("#", "");
+                if (!/^[\da-fA-F]{6}$/.test(normalized)) {
+                    return { r: 255, g: 255, b: 255 };
+                }
+
+                return {
+                    r: Number.parseInt(normalized.slice(0, 2), 16),
+                    g: Number.parseInt(normalized.slice(2, 4), 16),
+                    b: Number.parseInt(normalized.slice(4, 6), 16),
+                };
+            }
+
+            function applyTimeColor(color) {
+                const selectedColor =
+                    typeof color === "string" && /^#[\da-fA-F]{6}$/.test(color)
+                        ? color
+                        : "#111827";
+
+                const { r, g, b } = hexToRgb(selectedColor);
+                timeEl.style.color = selectedColor;
+                timeEl.style.textShadow = `0 4px 20px rgba(${r}, ${g}, ${b}, 0.45), 0 1px 3px rgba(0, 0, 0, 0.35)`;
+            }
+
+            function persistConfig() {
+                localStorage.setItem(
+                    STORAGE_KEY,
+                    JSON.stringify({
+                        durationSeconds,
+                        bgColor: bgColorInput.value || DEFAULT_BG_COLOR,
+                        fontColor,
+                        logoDataUrl,
+                        isFullMode,
+                    }),
+                );
+            }
+
+            function applyFullMode(enabled) {
+                isFullMode = Boolean(enabled);
+                document.body.classList.toggle("full-mode", isFullMode);
+                fullModeBtn.textContent = isFullMode
+                    ? ICON_EXIT_FULL
+                    : ICON_FULL;
+                fullModeBtn.setAttribute(
+                    "aria-label",
+                    isFullMode ? "Sair do modo full" : "Modo Full",
+                );
+                fullModeBtn.setAttribute(
+                    "title",
+                    isFullMode ? "Pressione ESC para sair do modo full" : "",
+                );
+            }
+
+            function isTypingContext(element) {
+                if (!element) return false;
+                const tag = element.tagName;
+                return (
+                    element.isContentEditable ||
+                    tag === "INPUT" ||
+                    tag === "TEXTAREA" ||
+                    tag === "SELECT"
+                );
+            }
+
+            resetBtn.textContent = ICON_RESET;
+            resetBtn.setAttribute("aria-label", "Reset");
+            resetBtn.setAttribute("title", "Reset");
+
+            function saveConfig() {
+                const minutes = Number(minutesInput.value) || 0;
+                const secondsRaw = Number(secondsInput.value) || 0;
+                const seconds = Math.max(0, Math.min(59, secondsRaw));
+                const bgColor = bgColorInput.value || DEFAULT_BG_COLOR;
+                fontColor = fontColorInput.value || DEFAULT_FONT_COLOR;
+                const total = minutes * 60 + seconds;
+
+                if (total <= 0) {
+                    alert("Defina um tempo maior que 00:00.");
+                    return;
+                }
+
+                durationSeconds = total;
+                remainingSeconds = durationSeconds;
+                document.body.style.backgroundColor = bgColor;
+                applyTimeColor(fontColor);
+
+                persistConfig();
+
+                stopTimer();
+                updateTime();
+            }
+
+            function loadConfig() {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (!raw) {
+                    document.body.style.backgroundColor = DEFAULT_BG_COLOR;
+                    applyTimeColor(DEFAULT_FONT_COLOR);
+                    applyLogo("");
+                    applyFullMode(false);
+                    updateTime();
+                    return;
+                }
+
+                try {
+                    const config = JSON.parse(raw);
+                    durationSeconds =
+                        Number(config.durationSeconds) > 0
+                            ? Number(config.durationSeconds)
+                            : 300;
+                    remainingSeconds = durationSeconds;
+                    logoDataUrl =
+                        typeof config.logoDataUrl === "string"
+                            ? config.logoDataUrl
+                            : "";
+
+                    const bgColor =
+                        typeof config.bgColor === "string"
+                            ? config.bgColor
+                            : DEFAULT_BG_COLOR;
+                    fontColor =
+                        typeof config.fontColor === "string"
+                            ? config.fontColor
+                            : DEFAULT_FONT_COLOR;
+                    isFullMode = Boolean(config.isFullMode);
+                    document.body.style.backgroundColor = bgColor;
+                    applyTimeColor(fontColor);
+                    applyFullMode(isFullMode);
+
+                    const mins = Math.floor(durationSeconds / 60);
+                    const secs = durationSeconds % 60;
+                    minutesInput.value = String(mins);
+                    secondsInput.value = String(secs);
+                    bgColorInput.value = bgColor;
+                    fontColorInput.value = fontColor;
+
+                    applyLogo(logoDataUrl);
+                } catch {
+                    localStorage.removeItem(STORAGE_KEY);
+                }
+
+                applyTimeColor(fontColor);
+                applyFullMode(isFullMode);
+                updateTime();
+            }
+
+            playPauseBtn.addEventListener("click", () => {
+                if (isRunning) {
+                    stopTimer();
+                } else {
+                    startTimer();
+                }
+            });
+
+            resetBtn.addEventListener("click", () => {
+                stopTimer();
+                remainingSeconds = durationSeconds;
+                updateTime();
+            });
+
+            fullModeBtn.addEventListener("click", () => {
+                applyFullMode(!isFullMode);
+                persistConfig();
+            });
+
+            document.addEventListener("keydown", (event) => {
+                if (isTypingContext(document.activeElement)) {
+                    return;
+                }
+
+                if (event.key === "1") {
+                    event.preventDefault();
+                    playPauseBtn.click();
+                    return;
+                }
+
+                if (event.key === "2") {
+                    event.preventDefault();
+                    resetBtn.click();
+                    return;
+                }
+
+                if (event.key === "3") {
+                    event.preventDefault();
+                    fullModeBtn.click();
+                    return;
+                }
+
+                if (event.key === "Escape" && isFullMode) {
+                    applyFullMode(false);
+                    persistConfig();
+                }
+            });
+
+            saveConfigBtn.addEventListener("click", saveConfig);
+
+            logoInput.addEventListener("change", () => {
+                const file = logoInput.files?.[0];
+                if (!file) return;
+
+                if (file.type !== "image/png") {
+                    alert("Apenas arquivo PNG é permitido para a logo.");
+                    logoInput.value = "";
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = () => {
+                    logoDataUrl =
+                        typeof reader.result === "string" ? reader.result : "";
+                    applyLogo(logoDataUrl);
+                    persistConfig();
+                };
+                reader.readAsDataURL(file);
+            });
+
+            removeLogoBtn.addEventListener("click", () => {
+                logoDataUrl = "";
+                logoInput.value = "";
+                applyLogo(logoDataUrl);
+                persistConfig();
+            });
+
+            resetConfigBtn.addEventListener("click", () => {
+                stopTimer();
+                durationSeconds = DEFAULT_DURATION_SECONDS;
+                remainingSeconds = DEFAULT_DURATION_SECONDS;
+                fontColor = DEFAULT_FONT_COLOR;
+                logoDataUrl = "";
+
+                minutesInput.value = "5";
+                secondsInput.value = "0";
+                bgColorInput.value = DEFAULT_BG_COLOR;
+                fontColorInput.value = DEFAULT_FONT_COLOR;
+                logoInput.value = "";
+
+                document.body.style.backgroundColor = DEFAULT_BG_COLOR;
+                applyTimeColor(DEFAULT_FONT_COLOR);
+                applyLogo("");
+                applyFullMode(false);
+                persistConfig();
+                updateTime();
+            });
+
+            loadConfig();
+        </script>
+    </body>
+</html>
+
