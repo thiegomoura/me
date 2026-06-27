@@ -313,7 +313,7 @@
             <div class="fields">
                 <div class="field">
                     <label for="minutesInput">Tempo (minutos)</label>
-                    <input id="minutesInput" type="number" min="0" value="5" />
+                    <input id="minutesInput" type="number" min="0" value="0" />
                 </div>
 
                 <div class="field">
@@ -390,7 +390,7 @@
             <section class="display" aria-live="polite">
                 <div class="display-content">
                     <img id="logoPreview" alt="Logo configurada" />
-                    <div id="time">05:00</div>
+                    <div id="time">00:00</div>
                     <section class="controls">
                         <button
                             id="playPauseBtn"
@@ -423,7 +423,7 @@
 
         <script>
             const STORAGE_KEY = "timerConfigV1";
-            const DEFAULT_DURATION_SECONDS = 3 * 60;
+            const DEFAULT_DURATION_SECONDS = 0;
             const DEFAULT_BG_COLOR = "#ffffff";
             const DEFAULT_FONT_COLOR = "#111827";
             const ICON_PLAY = "▶";
@@ -450,7 +450,7 @@
             let isRunning = false;
             let durationSeconds = DEFAULT_DURATION_SECONDS;
             let remainingSeconds = durationSeconds;
-            let logoDataUrl = "";
+            let logoDataUrl = "./img/CODIRC 2026.png";
             let fontColor = DEFAULT_FONT_COLOR;
             let isFullMode = false;
 
@@ -481,15 +481,15 @@
             }
 
             function startTimer() {
-                if (isRunning || remainingSeconds <= 0) return;
+                if (isRunning) return;
                 isRunning = true;
                 playPauseBtn.textContent = ICON_PAUSE;
                 playPauseBtn.setAttribute("aria-label", "Pause");
                 playPauseBtn.setAttribute("title", "Pause");
 
                 intervalId = setInterval(() => {
+                    remainingSeconds += 1;
                     if (remainingSeconds > 0) {
-                        remainingSeconds -= 1;
                         updateTime();
                     }
 
@@ -603,10 +603,10 @@
                 fontColor = fontColorInput.value || DEFAULT_FONT_COLOR;
                 const total = minutes * 60 + seconds;
 
-                if (total <= 0) {
-                    alert("Defina um tempo maior que 00:00.");
-                    return;
-                }
+                // if (total <= 0) {
+                //     alert("Defina um tempo maior que 00:00.");
+                //     return;
+                // }
 
                 durationSeconds = total;
                 remainingSeconds = durationSeconds;
@@ -632,10 +632,9 @@
 
                 try {
                     const config = JSON.parse(raw);
-                    durationSeconds =
-                        Number(config.durationSeconds) > 0
-                            ? Number(config.durationSeconds)
-                            : 300;
+                    durationSeconds = Number(config.durationSeconds)
+                        ? Number(config.durationSeconds)
+                        : 0;
                     remainingSeconds = durationSeconds;
                     logoDataUrl =
                         typeof config.logoDataUrl === "string"
@@ -756,7 +755,7 @@
                 fontColor = DEFAULT_FONT_COLOR;
                 logoDataUrl = "";
 
-                minutesInput.value = "5";
+                minutesInput.value = "0";
                 secondsInput.value = "0";
                 bgColorInput.value = DEFAULT_BG_COLOR;
                 fontColorInput.value = DEFAULT_FONT_COLOR;
