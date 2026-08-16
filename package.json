@@ -8,9 +8,19 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "prebuild": "tsx scripts/generate-og.ts"
   },
   "dependencies": {
     "astro": "^5.0.0"
+  },
+  "devDependencies": {
+    "@astrojs/rss": "^4.0.19",
+    "@fontsource/inter": "^5.3.0",
+    "@resvg/resvg-js": "^2.6.2",
+    "gray-matter": "^4.0.3",
+    "satori": "^0.29.0",
+    "satori-html": "^0.3.2",
+    "tsx": "^4.23.12"
   }
 }

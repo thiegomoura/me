@@ -32,6 +32,8 @@ const Diagram = study.data.diagram ? diagrams[study.data.diagram] : null;
         study.data.period,
         `${study.data.metric.value} ${study.data.metric.label}`,
     ]}
+    ogImage={`/og/case-study-${study.id.replace(/\.md$/, '')}.png`}
+    ogType="article"
 >
     {Diagram && (
         <div class="diagram">

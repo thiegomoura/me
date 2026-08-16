@@ -16,8 +16,15 @@ const { article } = Astro.props;
 const { Content } = await render(article);
 
 const date = article.data.pubDate.toISOString().slice(0, 10);
+const slug = article.id.replace(/\.md$/, '');
 ---
-<BaseLayout title={article.data.title} pageClass="page-article">
+<BaseLayout
+    title={article.data.title}
+    description={article.data.description}
+    pageClass="page-article"
+    ogImage={`/og/article-${slug}.png`}
+    ogType="article"
+>
     <article class="article reveal">
         <header class="article-header">
             <p class="article-meta mono">

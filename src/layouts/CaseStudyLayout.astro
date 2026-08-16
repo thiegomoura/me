@@ -6,11 +6,12 @@ interface Props {
     tag: string;
     subtitle: string;
     meta: string[];
+    ogImage?: string;
 }
 
-const { title, tag, subtitle, meta } = Astro.props;
+const { title, tag, subtitle, meta, ogImage } = Astro.props;
 ---
-<BaseLayout title={title} pageClass="page-case-study">
+<BaseLayout title={title} pageClass="page-case-study" ogImage={ogImage} ogType="article">
     <article class="case-study">
         <header class="case-study__header reveal">
             <span class="case-study__tag mono">{tag}</span>

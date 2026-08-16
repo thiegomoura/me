@@ -7,15 +7,20 @@ interface Props {
     title: string;
     description?: string;
     pageClass?: string;
+    ogImage?: string;
+    ogType?: string;
 }
 
 const {
     title,
     description = 'Backend Software Engineer — Node.js · Nest.js · TypeScript · Cloud-native (AWS & Azure). I design, ship, and operate the services that other teams depend on.',
     pageClass,
+    ogImage = '/og/default.png',
+    ogType = 'website',
 } = Astro.props;
 
 const fullTitle = title === 'thiego.dev' ? title : `${title} — thiego.dev`;
+const ogImageUrl = new URL(ogImage, Astro.site).toString();
 ---
 <!doctype html>
 <html lang="en" class="theme-dark">
@@ -25,10 +30,23 @@ const fullTitle = title === 'thiego.dev' ? title : `${title} — thiego.dev`;
         <meta name="description" content={description} />
         <meta property="og:title" content={fullTitle} />
         <meta property="og:description" content={description} />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={Astro.site} />
+        <meta property="og:type" content={ogType} />
+        <meta property="og:url" content={Astro.url} />
+        <meta property="og:image" content={ogImageUrl} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={fullTitle} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={ogImageUrl} />
         <meta name="generator" content={Astro.generator} />
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link
+            rel="alternate"
+            type="application/rss+xml"
+            title="thiego.dev articles"
+            href="/rss.xml"
+        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
