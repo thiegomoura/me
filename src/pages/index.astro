@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
+import AsciiPortrait from '../components/AsciiPortrait.astro';
 import SkillGroup from '../components/SkillGroup.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import Timeline from '../components/Timeline.astro';
@@ -67,6 +68,8 @@ const projects = allStudies
     }));
 ---
 <BaseLayout title="thiego.dev" pageClass="page-home">
+    <AsciiPortrait />
+
     <Hero
         title="I build backend systems that handle millions of requests without paging me at 3 AM."
         intro="Backend Software Engineer — Node.js · Nest.js · TypeScript · Cloud-native (AWS & Azure). I design, ship, and operate the services that other teams depend on."
