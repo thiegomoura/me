@@ -37,6 +37,8 @@
     --text-muted: var(--ink-300);
     --text-dim: var(--ink-400);
     --selection-bg: var(--ink-500);
+    --accent: #34d399;
+    --accent-on: #0e1014;
 }
 
 .theme-light {
@@ -49,6 +51,8 @@
     --text-muted: var(--ink-500);
     --text-dim: var(--ink-400);
     --selection-bg: var(--ink-200);
+    --accent: #059669;
+    --accent-on: #ffffff;
 }
 
 * {
@@ -135,15 +139,12 @@ hr {
 }
 
 .section {
-    margin-top: var(--section-gap);
     padding-top: var(--section-gap);
     border-top: 1px solid var(--hairline);
 }
 
 .section:first-of-type {
     border-top: 0;
-    margin-top: calc(var(--section-gap) / 2);
-    padding-top: 0;
 }
 
 .section-title {
@@ -187,10 +188,13 @@ hr {
 }
 
 .marker-list > li::before {
-    content: '[*]';
+    content: '✓';
     font-family: var(--font-mono);
-    font-size: 0.78rem;
-    color: var(--text-dim);
+    font-size: 0.85rem;
+    color: var(--accent);
+    line-height: 1;
+    position: relative;
+    top: 1px;
 }
 
 .metric {
@@ -198,8 +202,8 @@ hr {
     align-items: baseline;
     gap: 0.4em;
     padding: 0.3em 0.7em;
-    background: var(--text);
-    color: var(--bg);
+    background: var(--accent);
+    color: var(--accent-on);
     font-family: var(--font-mono);
     font-size: 0.78rem;
     font-weight: 600;
@@ -213,8 +217,8 @@ hr {
 }
 
 .metric .metric-label {
-    color: var(--bg);
-    opacity: 0.7;
+    color: var(--accent-on);
+    opacity: 0.78;
     font-weight: 500;
 }
 
@@ -250,9 +254,9 @@ hr {
     align-items: center;
     gap: 0.5em;
     padding: 0.7em 1.2em;
-    border: 1px solid var(--text);
-    background: var(--text);
-    color: var(--bg);
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: var(--accent-on);
     font-family: var(--font-sans);
     font-size: 0.9rem;
     font-weight: 600;
@@ -263,7 +267,7 @@ hr {
 
 .btn:hover {
     opacity: 0.88;
-    color: var(--bg);
+    color: var(--accent-on);
     transform: translateY(-1px);
 }
 
@@ -275,8 +279,8 @@ hr {
 
 .btn--ghost:hover {
     background: var(--surface);
-    color: var(--text);
-    border-color: var(--text-dim);
+    color: var(--accent);
+    border-color: var(--accent);
     opacity: 1;
 }
 
