@@ -27,7 +27,7 @@ const articles = allArticles
             <ul class="articles-list">
                 {articles.map((a) => (
                     <li>
-                        <a href={`/articles/${a.id}/`} class="article-link">
+                        <a href={`/articles/${a.id.replace(/\.md$/, '')}/`} class="article-link">
                             <span class="article-date mono">{a.data.pubDate.toISOString().slice(0, 10)}</span>
                             <span class="article-title">{a.data.title}</span>
                             <span class="article-desc">{a.data.description}</span>
