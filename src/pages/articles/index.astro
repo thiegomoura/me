@@ -1,0 +1,142 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const allArticles = await getCollection('articles');
+const articles = allArticles
+    .filter((a) => !a.data.draft)
+    .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+---
+<BaseLayout title="Articles" pageClass="page-articles">
+    <header class="page-header reveal">
+        <h1>Articles</h1>
+        <p>
+            Notes on backend engineering, distributed systems, and the operational reality of
+            shipping software. Written in the same voice as the case studies — long enough to be
+            useful, short enough to read in one sitting.
+        </p>
+    </header>
+
+    {articles.length === 0 ? (
+        <section class="section">
+            <p class="empty mono">no articles published yet</p>
+        </section>
+    ) : (
+        <section class="section">
+            <h2 class="section-title">All articles</h2>
+            <ul class="articles-list">
+                {articles.map((a) => (
+                    <li>
+                        <a href={`/articles/${a.id}/`} class="article-link">
+                            <span class="article-date mono">{a.data.pubDate.toISOString().slice(0, 10)}</span>
+                            <span class="article-title">{a.data.title}</span>
+                            <span class="article-desc">{a.data.description}</span>
+                            {a.data.tags.length > 0 && (
+                                <span class="article-tags mono">
+                                    {a.data.tags.map((t) => `#${t}`).join(' ')}
+                                </span>
+                            )}
+                        </a>
+                    </li>
+                ))}
+            </ul>
+        </section>
+    )}
+</BaseLayout>
+
+<style>
+    .page-header {
+        padding: calc(var(--gutter) * 0.5) 0 var(--gutter);
+    }
+
+    .page-header h1 {
+        font-size: clamp(1.9rem, 3.4vw, 2.4rem);
+        line-height: 1.1;
+        letter-spacing: -0.03em;
+        margin: 0 0 0.7rem;
+    }
+
+    .page-header p {
+        font-size: 1.02rem;
+        line-height: 1.7;
+        color: var(--text-muted);
+        max-width: 60ch;
+        margin: 0;
+    }
+
+    .empty {
+        color: var(--text-dim);
+        font-size: 0.85rem;
+    }
+
+    .articles-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .articles-list li {
+        border-top: 1px solid var(--hairline);
+    }
+
+    .articles-list li:last-child {
+        border-bottom: 1px solid var(--hairline);
+    }
+
+    .article-link {
+        display: grid;
+        grid-template-columns: 8ch 1fr;
+        column-gap: 1.2rem;
+        row-gap: 0.3rem;
+        padding: 1.2rem 0;
+        color: var(--text);
+    }
+
+    .article-link:hover {
+        color: var(--text);
+    }
+
+    .article-link:hover .article-title {
+        color: var(--accent);
+    }
+
+    .article-date {
+        font-size: 0.78rem;
+        color: var(--text-dim);
+        align-self: start;
+        margin-top: 0.15rem;
+    }
+
+    .article-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--text);
+        transition: color var(--duration) var(--ease);
+    }
+
+    .article-desc {
+        grid-column: 2;
+        font-size: 0.92rem;
+        color: var(--text-muted);
+        line-height: 1.55;
+    }
+
+    .article-tags {
+        grid-column: 2;
+        font-size: 0.72rem;
+        color: var(--text-dim);
+        margin-top: 0.3rem;
+    }
+
+    @media (max-width: 640px) {
+        .article-link {
+            grid-template-columns: 1fr;
+        }
+
+        .article-date,
+        .article-desc,
+        .article-tags {
+            grid-column: 1;
+        }
+    }
+</style>

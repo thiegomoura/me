@@ -1,42 +1,21 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 
-const projects = [
-    {
-        slug: 'case-study-sync',
-        title: 'Generic Offline-First Sync',
-        context: 'Ioasys',
-        period: '2023',
-        tags: ['Nest.js', 'TypeScript', 'PostgreSQL', 'Azure'],
-        summary:
-            'A table-agnostic sync engine that eliminated per-feature custom logic and powered offline clients across the product.',
-        metricValue: '−90%',
-        metricLabel: 'sync defects',
-    },
-    {
-        slug: 'case-study-perf',
-        title: 'Critical-Path Query Rewrites',
-        context: 'Ioasys',
-        period: '2024',
-        tags: ['PostgreSQL', 'Redis', 'Nest.js', 'CI/CD'],
-        summary:
-            'Cut a critical-path endpoint from 8s to 0.9s and trimmed CI from 20min to 12min with obfuscation and minification.',
-        metricValue: '−89%',
-        metricLabel: 'P95 latency',
-    },
-    {
-        slug: 'case-study-platform',
-        title: 'Serverless Club Platform',
-        context: 'iClubs',
-        period: '2021–2023',
-        tags: ['Node.js', 'TypeScript', 'AWS Lambda', 'DynamoDB', 'MongoDB'],
-        summary:
-            'A serverless microservices platform on AWS with Lambda, DynamoDB, and MongoDB — DDD and Clean Architecture from day one.',
-        metricValue: '8h/wk',
-        metricLabel: 'team time saved',
-    },
-];
+const allStudies = await getCollection('case-studies');
+const projects = allStudies
+    .sort((a, b) => a.data.order - b.data.order)
+    .map((s) => ({
+        slug: `case-study/${s.id.replace(/\.md$/, '')}/`,
+        title: s.data.title,
+        context: s.data.context,
+        period: s.data.period,
+        tags: s.data.stack,
+        summary: s.data.subtitle,
+        metricValue: s.data.metric.value,
+        metricLabel: s.data.metric.label,
+    }));
 ---
 <BaseLayout title="Projects" pageClass="page-projects">
     <header class="page-header reveal">

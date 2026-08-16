@@ -1,0 +1,46 @@
+---
+import { getCollection, render } from 'astro:content';
+import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
+import SyncDiagram from '../../components/diagrams/SyncDiagram.astro';
+import PerfDiagram from '../../components/diagrams/PerfDiagram.astro';
+import PlatformDiagram from '../../components/diagrams/PlatformDiagram.astro';
+
+export async function getStaticPaths() {
+    const studies = await getCollection('case-studies');
+    return studies.map((study) => ({
+        params: { slug: study.id.replace(/\.md$/, '') },
+        props: { study },
+    }));
+}
+
+const { study } = Astro.props;
+const { Content } = await render(study);
+
+const diagrams = {
+    sync: SyncDiagram,
+    perf: PerfDiagram,
+    platform: PlatformDiagram,
+};
+const Diagram = study.data.diagram ? diagrams[study.data.diagram] : null;
+---
+<CaseStudyLayout
+    title={study.data.title}
+    tag={study.data.tag}
+    subtitle={study.data.subtitle}
+    meta={[
+        study.data.context,
+        study.data.period,
+        `${study.data.metric.value} ${study.data.metric.label}`,
+    ]}
+>
+    {Diagram && (
+        <div class="diagram">
+            <Diagram />
+        </div>
+    )}
+    <Content />
+    <h2>Stack</h2>
+    <div class="stack">
+        {study.data.stack.map((tech) => <span class="tag">{tech}</span>)}
+    </div>
+</CaseStudyLayout>
