@@ -1,9 +1,14 @@
 ---
+import Logo from './Logo.astro';
+
 const year = new Date().getFullYear();
 ---
 <footer class="footer">
     <div class="footer-inner">
-        <p class="footer-copy">© {year} Thiego Moura — built with Astro, deployed via GitHub Pages.</p>
+        <div class="footer-brand">
+            <Logo color="var(--text-dim)" size={22} />
+            <p class="footer-copy">© {year} Thiego Moura — built with Astro, deployed via GitHub Pages.</p>
+        </div>
         <ul class="footer-links">
             <li><a href="https://github.com/thiegomoura" target="_blank" rel="noopener noreferrer">github</a></li>
             <li><a href="https://www.linkedin.com/in/thiegomoura/" target="_blank" rel="noopener noreferrer">linkedin</a></li>
@@ -27,6 +32,12 @@ const year = new Date().getFullYear();
         gap: 0.6rem 1.2rem;
         justify-content: space-between;
         align-items: center;
+    }
+
+    .footer-brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
     }
 
     .footer-copy {

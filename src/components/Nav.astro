@@ -1,5 +1,6 @@
 ---
 import ThemeToggle from './ThemeToggle.astro';
+import Logo from './Logo.astro';
 
 const path = Astro.url.pathname;
 const isActive = (href: string) =>
@@ -14,7 +15,7 @@ const links = [
 <header class="nav-root">
     <div class="nav-inner">
         <a class="nav-brand" href="/">
-            <span class="nav-brand__mark">[ tm ]</span>
+            <Logo size={32} />
             <span class="nav-brand__name">Thiego Moura</span>
         </a>
         <nav class="nav-links" aria-label="Primary">
@@ -50,7 +51,7 @@ const links = [
         display: grid;
         grid-template-columns: auto 1fr auto;
         align-items: center;
-        gap: 1.5rem;
+        gap: 1.2rem;
         padding: 0.9rem 0;
     }
 
@@ -59,15 +60,6 @@ const links = [
         align-items: center;
         gap: 0.6rem;
         font-weight: 600;
-    }
-
-    .nav-brand__mark {
-        font-family: var(--font-mono);
-        font-size: 0.78rem;
-        padding: 0.2em 0.45em;
-        background: var(--surface);
-        border: 1px solid var(--border);
-        color: var(--text);
     }
 
     .nav-brand__name {
