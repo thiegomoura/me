@@ -135,21 +135,20 @@ const slug = article.id.replace(/\.md$/, '');
     }
 
     .article-body :global(ul li) {
-        display: grid;
-        grid-template-columns: 2.5ch 1fr;
-        gap: 0.5em;
-        align-items: baseline;
+        position: relative;
+        padding-left: 2ch;
         margin-bottom: 0.4rem;
     }
 
     .article-body :global(ul li::before) {
         content: '✓';
+        position: absolute;
+        left: 0;
+        top: 0;
         font-family: var(--font-mono);
         font-size: 0.85rem;
         color: var(--accent);
-        line-height: 1;
-        position: relative;
-        top: 1px;
+        line-height: 1.7;
     }
 
     .article-body :global(ol) {
