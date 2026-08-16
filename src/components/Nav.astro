@@ -198,6 +198,16 @@ const links = [
                     btn.focus();
                 }
             });
+
+            window.addEventListener(
+                'scroll',
+                function () {
+                    if (root.classList.contains('is-open')) {
+                        setOpen(false);
+                    }
+                },
+                { passive: true },
+            );
         }
 
         if (document.readyState === 'loading') {
