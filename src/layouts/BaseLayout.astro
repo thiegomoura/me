@@ -55,6 +55,9 @@ const ogImageUrl = new URL(ogImage, Astro.site).toString();
         />
         <title>{fullTitle}</title>
         <script is:inline>
+            document.documentElement.classList.add('js-ready');
+        </script>
+        <script is:inline>
             (function () {
                 try {
                     var stored = localStorage.getItem('theme');
