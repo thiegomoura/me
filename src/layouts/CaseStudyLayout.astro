@@ -1,0 +1,180 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+    title: string;
+    tag: string;
+    subtitle: string;
+    meta: string[];
+}
+
+const { title, tag, subtitle, meta } = Astro.props;
+---
+<BaseLayout title={title} pageClass="page-case-study">
+    <article class="case-study">
+        <header class="case-study__header reveal">
+            <span class="case-study__tag mono">{tag}</span>
+            <h1 class="case-study__title">{title}</h1>
+            <p class="case-study__subtitle">{subtitle}</p>
+            <p class="case-study__meta mono">
+                {meta.map((m, i) => (
+                    <span class="case-study__meta-item">{m}</span>
+                ))}
+            </p>
+        </header>
+
+        <div class="case-study__body">
+            <slot />
+        </div>
+
+        <footer class="case-study__footer">
+            <a class="btn btn--ghost" href="/projects">← All case studies</a>
+            <a class="btn btn--ghost" href="/adrs">Read ADRs →</a>
+        </footer>
+    </article>
+</BaseLayout>
+
+<style>
+    .case-study {
+        max-width: 100%;
+    }
+
+    .case-study__header {
+        padding: calc(var(--gutter) * 0.5) 0 var(--gutter);
+        border-bottom: 1px solid var(--hairline);
+        margin-bottom: var(--gutter);
+    }
+
+    .case-study__tag {
+        display: inline-block;
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        color: var(--text-dim);
+        margin-bottom: 0.9rem;
+    }
+
+    .case-study__title {
+        font-size: clamp(1.7rem, 3.6vw, 2.4rem);
+        line-height: 1.1;
+        letter-spacing: -0.03em;
+        font-weight: 700;
+        margin: 0 0 0.7rem;
+    }
+
+    .case-study__subtitle {
+        font-size: clamp(1rem, 1.3vw, 1.12rem);
+        line-height: 1.6;
+        color: var(--text-muted);
+        max-width: 60ch;
+        margin: 0 0 1.2rem;
+    }
+
+    .case-study__meta {
+        margin: 0;
+        font-size: 0.78rem;
+        color: var(--text-dim);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .case-study__meta-item {
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .case-study__meta-item + .case-study__meta-item::before {
+        content: '/';
+        color: var(--border);
+        margin-right: 0.5rem;
+        font-weight: 400;
+    }
+
+    .case-study__body :global(h2) {
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        color: var(--text-dim);
+        margin: var(--gutter) 0 0.9rem;
+        display: flex;
+        align-items: baseline;
+        gap: 0.5em;
+        padding-top: 0.5rem;
+    }
+
+    .case-study__body :global(h2::before) {
+        content: '>';
+        color: var(--text-dim);
+    }
+
+    .case-study__body :global(p),
+    .case-study__body :global(li) {
+        color: var(--text-muted);
+        line-height: 1.7;
+        font-size: 0.98rem;
+    }
+
+    .case-study__body :global(ul) {
+        padding-left: 0;
+        margin: 0 0 1rem;
+        list-style: none;
+    }
+
+    .case-study__body :global(ul li) {
+        display: grid;
+        grid-template-columns: 2.5ch 1fr;
+        gap: 0.5em;
+        align-items: baseline;
+        margin-bottom: 0.4rem;
+    }
+
+    .case-study__body :global(ul li::before) {
+        content: '✓';
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        color: var(--accent);
+        line-height: 1;
+        position: relative;
+        top: 1px;
+    }
+
+    .case-study__body :global(strong) {
+        color: var(--text);
+    }
+
+    .case-study__body :global(.diagram) {
+        margin: 1.2rem 0 1.5rem;
+        padding: 1.5rem 1rem;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        text-align: center;
+    }
+
+    .case-study__body :global(.diagram svg) {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .case-study__body :global(.stack) {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        margin-top: 0.5rem;
+    }
+
+    .case-study__body :global(.stack .tag) {
+        font-size: 0.72rem;
+    }
+
+    .case-study__footer {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        margin-top: var(--section-gap);
+        padding-top: calc(var(--gutter) * 1.2);
+        border-top: 1px solid var(--hairline);
+    }
+</style>

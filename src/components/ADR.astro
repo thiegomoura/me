@@ -1,0 +1,129 @@
+---
+interface Props {
+    id: string;
+    title: string;
+    status: string;
+    context: string;
+    decision: string;
+    consequences: string[];
+}
+
+const { id, title, status, context, decision, consequences } = Astro.props;
+---
+<article class="adr reveal">
+    <header class="adr__head">
+        <span class="adr__id mono">ADR-{id}</span>
+        <h2 class="adr__title">{title}</h2>
+        <span class="adr__status mono">{status}</span>
+    </header>
+    <section class="adr__section">
+        <h3>Context</h3>
+        <p>{context}</p>
+    </section>
+    <section class="adr__section">
+        <h3>Decision</h3>
+        <p>{decision}</p>
+    </section>
+    <section class="adr__section">
+        <h3>Consequences</h3>
+        <ul>
+            {consequences.map((c) => <li><span>{c}</span></li>)}
+        </ul>
+    </section>
+</article>
+
+<style>
+    .adr {
+        padding: 1.5rem 0;
+        border-top: 1px solid var(--hairline);
+    }
+
+    .adr:first-of-type {
+        border-top: 0;
+    }
+
+    .adr__head {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: baseline;
+        gap: 0.5rem 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .adr__id {
+        font-size: 0.72rem;
+        color: var(--accent);
+        font-weight: 600;
+        letter-spacing: 0.04em;
+    }
+
+    .adr__title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--text);
+    }
+
+    .adr__status {
+        font-size: 0.7rem;
+        color: var(--text-dim);
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+    }
+
+    .adr__section {
+        margin-bottom: 0.85rem;
+    }
+
+    .adr__section h3 {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--text-dim);
+        margin: 0 0 0.4rem;
+        font-weight: 500;
+    }
+
+    .adr__section p {
+        margin: 0 0 0.5rem;
+        color: var(--text-muted);
+        line-height: 1.7;
+        font-size: 0.96rem;
+    }
+
+    .adr__section ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+    }
+
+    .adr__section ul li {
+        display: grid;
+        grid-template-columns: 2.5ch 1fr;
+        gap: 0.5em;
+        align-items: baseline;
+        color: var(--text-muted);
+        line-height: 1.65;
+        font-size: 0.95rem;
+    }
+
+    .adr__section ul li::before {
+        content: '✓';
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        color: var(--accent);
+        line-height: 1;
+        position: relative;
+        top: 1px;
+    }
+
+    @media (max-width: 640px) {
+        .adr__head {
+            grid-template-columns: 1fr;
+            gap: 0.3rem;
+        }
+    }
+</style>

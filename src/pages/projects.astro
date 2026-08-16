@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+
+const projects = [
+    {
+        slug: 'case-study-sync',
+        title: 'Generic Offline-First Sync',
+        context: 'Ioasys',
+        period: '2023',
+        tags: ['Nest.js', 'TypeScript', 'PostgreSQL', 'Azure'],
+        summary:
+            'A table-agnostic sync engine that eliminated per-feature custom logic and powered offline clients across the product.',
+        metricValue: '−90%',
+        metricLabel: 'sync defects',
+    },
+    {
+        slug: 'case-study-perf',
+        title: 'Critical-Path Query Rewrites',
+        context: 'Ioasys',
+        period: '2024',
+        tags: ['PostgreSQL', 'Redis', 'Nest.js', 'CI/CD'],
+        summary:
+            'Cut a critical-path endpoint from 8s to 0.9s and trimmed CI from 20min to 12min with obfuscation and minification.',
+        metricValue: '−89%',
+        metricLabel: 'P95 latency',
+    },
+    {
+        slug: 'case-study-platform',
+        title: 'Serverless Club Platform',
+        context: 'iClubs',
+        period: '2021–2023',
+        tags: ['Node.js', 'TypeScript', 'AWS Lambda', 'DynamoDB', 'MongoDB'],
+        summary:
+            'A serverless microservices platform on AWS with Lambda, DynamoDB, and MongoDB — DDD and Clean Architecture from day one.',
+        metricValue: '8h/wk',
+        metricLabel: 'team time saved',
+    },
+];
+---
+<BaseLayout title="Projects" pageClass="page-projects">
+    <header class="page-header reveal">
+        <h1>Case Studies</h1>
+        <p>
+            Selected backend work with measurable impact. Each card opens a longer write-up with
+            context, architecture, key decisions, and outcomes — the kind of detail that survives a
+            senior interview whiteboard.
+        </p>
+    </header>
+
+    <section class="section">
+        <h2 class="section-title">All case studies</h2>
+        <div class="projects-list">
+            {projects.map((p) => <ProjectCard {...p} />)}
+        </div>
+        <p class="section-cta">
+            <a class="btn btn--ghost" href="/adrs">Read architecture decisions →</a>
+        </p>
+    </section>
+</BaseLayout>
+
+<style>
+    .page-header {
+        padding: calc(var(--gutter) * 0.5) 0 var(--gutter);
+    }
+
+    .page-header h1 {
+        font-size: clamp(1.9rem, 3.4vw, 2.4rem);
+        line-height: 1.1;
+        letter-spacing: -0.03em;
+        margin: 0 0 0.7rem;
+    }
+
+    .page-header p {
+        font-size: 1.02rem;
+        line-height: 1.7;
+        color: var(--text-muted);
+        max-width: 60ch;
+        margin: 0;
+    }
+
+    .projects-list {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .section-cta {
+        margin-top: 1.5rem;
+    }
+</style>

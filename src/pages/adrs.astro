@@ -1,0 +1,133 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ADR from '../components/ADR.astro';
+
+const adrs = [
+    {
+        id: '001',
+        title: 'Clean Architecture & DDD over framework-driven design',
+        status: 'Accepted · Ioasys · 2023',
+        context:
+            'The team was growing, the product was acquiring new modules, and feature requests were arriving faster than the framework\'s conventions could absorb them. The default NestJS layout (controllers → services → repositories) was getting in the way: business logic was leaking into controllers, repositories were turning into mini-services, and unit tests needed to boot half the world.',
+        decision:
+            'Adopt Clean Architecture with a DDD-flavored layering for every backend module: domain (entities, value objects, domain services) at the center, application (use cases) orchestrating it, infrastructure (NestJS controllers, repositories, third-party clients) at the edge. Framework code never imports domain code — only the reverse.',
+        consequences: [
+            'Use cases become pure and trivial to unit-test without HTTP, without a database, and without a framework.',
+            'Switching a database, message broker, or HTTP framework becomes a port-replacement exercise, not a rewrite.',
+            'More files and a steeper onboarding curve for engineers who haven\'t seen the pattern before — accepted as the cost of stability.',
+            'Framework-specific features (NestJS interceptors, guards) stay at the infrastructure layer; if a feature can\'t be expressed at the edge, the architecture is wrong, not the feature.',
+        ],
+    },
+    {
+        id: '002',
+        title: 'Schema-driven offline-first sync over per-feature sync',
+        status: 'Accepted · Ioasys · 2023',
+        context:
+            'Every offline-capable feature was re-implementing its own sync pipeline: custom deltas, custom conflict handling, custom retry logic, custom observability. The team was paying a 1–2 week tax per new offline feature, and sync bugs were the largest category of customer-reported issues.',
+        decision:
+            'Build a single schema-driven sync engine. A feature owner declares a table\'s version column, soft-delete flag, and conflict policy, and the engine handles push, pull, delta application, and conflict resolution for free. Per-feature sync code is no longer written.',
+        consequences: [
+            'New offline features integrate in a day instead of a sprint.',
+            'Sync-related defects dropped ~90% in the quarter after rollout.',
+            'The engine itself is a critical dependency — it gets its own SLO, its own dashboards, and a dedicated owner.',
+            'Schemas that don\'t fit the engine\'s assumptions need explicit extension points rather than special cases.',
+        ],
+    },
+    {
+        id: '003',
+        title: 'Polyglot persistence: PostgreSQL primary, MongoDB for flexible-schema',
+        status: 'Accepted · iClubs · 2022',
+        context:
+            'One database was being asked to be everything: high-volume, access-pattern-driven operational data, and flexible-schema content with per-tenant custom fields. The access patterns for the two workloads were different enough that a single engine was making both of them slower.',
+        decision:
+            'Default to PostgreSQL for the operational core of every bounded context — relational, transactional, well-understood, and excellent for the joins that the product actually depends on. Reach for MongoDB only when the data is genuinely document-shaped and per-tenant variable (custom fields, club profiles, attachments metadata). Pick the data store per bounded context, not per service.',
+        consequences: [
+            'Each store is optimized for what it actually does; no more "the database is fine, the query is the problem" debugging dead ends.',
+            'Engineers need to know two databases, not one. That\'s the cost — and it\'s worth it for the read-path improvements.',
+            'Cross-store consistency becomes an explicit concern. The platform\'s event bus carries the responsibility, and the boundaries are documented in the bounded-context map.',
+        ],
+    },
+    {
+        id: '004',
+        title: 'Async-first cross-service communication via events',
+        status: 'Accepted · iClubs · 2022',
+        context:
+            'The microservices platform was being built, and the natural temptation was to wire services together with synchronous HTTP calls. Every new cross-service integration added another service that could fail the user request, and the failure domain was growing faster than the feature surface.',
+        decision:
+            'All cross-service communication is asynchronous by default. Producers publish to a topic (SNS/SQS) and forget. Consumers process at their own pace, with retries and dead-letter queues owned by the consumer. Synchronous calls are allowed only when the user is actively waiting on a single bounded context\'s response.',
+        consequences: [
+            'A consumer outage stops being a user-visible incident. The event lives in the queue; the user gets a clear "we\'ll process this shortly" state.',
+            'Latency for cross-context flows is bounded by the slowest consumer, not the slowest dependency chain — a deliberate trade.',
+            'Eventual consistency shows up in the product. UI states that are "good enough now, fully resolved soon" are explicitly designed, not papered over.',
+            'Idempotency is a hard requirement on every consumer. It\'s a tax we pay once, and it pays for itself the first time a message is redelivered.',
+        ],
+    },
+    {
+        id: '005',
+        title: 'Edge-to-app security baseline: helmet, rate-limit, OAuth2/OIDC',
+        status: 'Accepted · Standing decision · 2023+',
+        context:
+            'Every backend service eventually faces the same security baseline: protect against common HTTP-level attacks, defend against credential stuffing and abuse, and verify who the caller is. Solving this per service leads to inconsistent enforcement and easy-to-miss gaps. Solving it once, at the platform edge, lets the application code focus on authorization, not authentication plumbing.',
+        decision:
+            'Treat the security baseline as a non-optional default on every service I ship: helmet for HTTP hardening headers, rate-limit (token bucket, per-IP and per-identity) at the edge, and OAuth2 / OIDC for identity, with short-lived access tokens and refresh handled at the platform. Application code receives a verified identity and focuses only on authorization — what this caller is allowed to do.',
+        consequences: [
+            'The most common attacks are deflected before they reach business logic, by code that I trust because it\'s the same code on every service.',
+            'Token issuance, rotation, and revocation are a platform concern, not a per-service concern.',
+            'Service-to-service calls use signed client credentials (not user tokens) — keeps the audit trail clean and the blast radius small.',
+            'Defaults are conservative. When a service needs to relax a default, the relaxation is reviewed, not implicit.',
+        ],
+    },
+];
+---
+<BaseLayout title="ADRs" pageClass="page-adrs">
+    <header class="page-header reveal">
+        <h1>Architecture Decision Records</h1>
+        <p>
+            The non-obvious calls I made on real systems, written up the way I'd want to read them
+            in a code review: <strong>context</strong>, <strong>decision</strong>, and
+            <strong>consequences</strong> — including the ones I accepted as the cost of the choice.
+        </p>
+        <p class="page-header__note">
+            Status of every record below: <strong>Accepted</strong>. Some have been partially
+            superseded as the systems have grown; I'll mark those when they do.
+        </p>
+    </header>
+
+    <section class="section">
+        <h2 class="section-title">All ADRs</h2>
+        <div class="adrs-list">
+            {adrs.map((a) => <ADR {...a} />)}
+        </div>
+    </section>
+</BaseLayout>
+
+<style>
+    .page-header {
+        padding: calc(var(--gutter) * 0.5) 0 var(--gutter);
+    }
+
+    .page-header h1 {
+        font-size: clamp(1.9rem, 3.4vw, 2.4rem);
+        line-height: 1.1;
+        letter-spacing: -0.03em;
+        margin: 0 0 0.7rem;
+    }
+
+    .page-header p {
+        font-size: 1.02rem;
+        line-height: 1.7;
+        color: var(--text-muted);
+        max-width: 60ch;
+        margin: 0 0 0.9rem;
+    }
+
+    .page-header__note {
+        font-size: 0.92rem;
+        color: var(--text-dim);
+    }
+
+    .adrs-list {
+        display: flex;
+        flex-direction: column;
+    }
+</style>

@@ -1,0 +1,116 @@
+---
+import CaseStudyLayout from '../layouts/CaseStudyLayout.astro';
+---
+<CaseStudyLayout
+    title="Serverless Club Platform on AWS"
+    tag="Platform Engineering"
+    subtitle="A domain-driven, serverless microservices platform that took the team from a single hard-to-ship monolith to independently deployable bounded contexts."
+    meta={['iClubs', '2021–2023', '8h/wk recovered', 'Microservices + events']}
+>
+    <h2>Context</h2>
+    <p>
+        The product was a club-management platform used by hundreds of organizations. The original
+        codebase was a single Node.js monolith with no clear boundaries: every change carried
+        deployment risk, every feature branched off the same trunk, and incident response meant
+        paging whoever had touched the failing path most recently. The team needed to ship faster
+        without taking the platform down with each deploy.
+    </p>
+
+    <h2>Problem</h2>
+    <ul>
+        <li><span>One deploy unit, many teams — change collision was constant.</span></li>
+        <li><span>Domain logic was tangled with infrastructure code; testing required booting the world.</span></li>
+        <li><span>Scaling was uniform: noisy neighbors on one tenant affected everyone.</span></li>
+        <li><span>Operational tooling was a patchwork of ad-hoc scripts.</span></li>
+    </ul>
+
+    <h2>Approach</h2>
+    <p>
+        I led the move to a serverless, domain-aligned architecture on AWS, with a strict layered
+        template for every service. The guiding principles were: <strong>domain boundaries first,
+        technology second</strong>; <strong>tests as part of the deploy contract</strong>; and
+        <strong>every service is boring on the inside</strong>.
+    </p>
+    <ol>
+        <li><span><strong>Map the domain.</strong> Ran a DDD event-storming session with product and ops to identify bounded contexts (Members, Billing, Events, Notifications, Auth).</span></li>
+        <li><span><strong>Cut the monolith by bounded context.</strong> Each context got its own repo, its own Lambda, its own data store choice, and its own deploy pipeline.</span></li>
+        <li><span><strong>Standardize the service template.</strong> A shared NestJS scaffold enforced the same Clean Architecture layers, the same CI checks, and the same observability hooks across every service.</span></li>
+        <li><span><strong>Asynchronous by default.</strong> Cross-context work went through SNS/SQS, never direct HTTP calls. The system could lose a service and recover.</span></li>
+    </ol>
+
+    <h2>Architecture</h2>
+    <div class="diagram">
+        <svg viewBox="0 0 760 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Serverless microservices platform">
+            <defs>
+                <marker id="arrow-pf" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                    <path d="M0,0 L10,5 L0,10 z" fill="#34d399" />
+                </marker>
+            </defs>
+            <g font-family="Inter, system-ui, sans-serif" font-size="12" fill="currentColor">
+                <rect x="20" y="120" width="120" height="40" rx="6" fill="none" stroke="#34d399" />
+                <text x="80" y="144" text-anchor="middle" font-weight="700">Clients</text>
+                <rect x="180" y="120" width="120" height="40" rx="6" fill="none" stroke="#34d399" />
+                <text x="240" y="144" text-anchor="middle" font-weight="700">API Gateway</text>
+                <rect x="340" y="20" width="140" height="40" rx="6" fill="none" stroke="#34d399" />
+                <text x="410" y="44" text-anchor="middle" font-weight="700">Members · λ</text>
+                <rect x="340" y="80" width="140" height="40" rx="6" fill="none" stroke="#34d399" />
+                <text x="410" y="104" text-anchor="middle" font-weight="700">Billing · λ</text>
+                <rect x="340" y="140" width="140" height="40" rx="6" fill="none" stroke="#34d399" />
+                <text x="410" y="164" text-anchor="middle" font-weight="700">Events · λ</text>
+                <rect x="340" y="200" width="140" height="40" rx="6" fill="none" stroke="#34d399" />
+                <text x="410" y="224" text-anchor="middle" font-weight="700">Notifications · λ</text>
+                <rect x="540" y="60" width="160" height="40" rx="6" fill="none" stroke="currentColor" opacity="0.5" />
+                <text x="620" y="84" text-anchor="middle" font-weight="700" opacity="0.7">DynamoDB</text>
+                <rect x="540" y="120" width="160" height="40" rx="6" fill="none" stroke="currentColor" opacity="0.5" />
+                <text x="620" y="144" text-anchor="middle" font-weight="700" opacity="0.7">MongoDB</text>
+                <rect x="540" y="200" width="160" height="40" rx="6" fill="none" stroke="currentColor" opacity="0.5" />
+                <text x="620" y="224" text-anchor="middle" font-weight="700" opacity="0.7">SNS / SQS</text>
+                <line x1="140" y1="140" x2="180" y2="140" stroke="#34d399" stroke-width="2" marker-end="url(#arrow-pf)" />
+                <line x1="300" y1="130" x2="340" y2="40" stroke="#34d399" stroke-width="1.5" marker-end="url(#arrow-pf)" />
+                <line x1="300" y1="135" x2="340" y2="100" stroke="#34d399" stroke-width="1.5" marker-end="url(#arrow-pf)" />
+                <line x1="300" y1="145" x2="340" y2="160" stroke="#34d399" stroke-width="1.5" marker-end="url(#arrow-pf)" />
+                <line x1="300" y1="150" x2="340" y2="220" stroke="#34d399" stroke-width="1.5" marker-end="url(#arrow-pf)" />
+                <line x1="480" y1="40" x2="540" y2="80" stroke="#34d399" stroke-width="1.5" marker-end="url(#arrow-pf)" />
+                <line x1="480" y1="100" x2="540" y2="140" stroke="#34d399" stroke-width="1.5" marker-end="url(#arrow-pf)" />
+                <line x1="480" y1="220" x2="540" y2="220" stroke="#34d399" stroke-width="1.5" marker-end="url(#arrow-pf)" />
+            </g>
+        </svg>
+    </div>
+    <ul>
+        <li><span><strong>Per-context Lambdas</strong> own their data store and expose a thin contract; cross-context calls are asynchronous.</span></li>
+        <li><span><strong>DynamoDB</strong> for high-volume, access-pattern-driven data (sessions, activity).</span></li>
+        <li><span><strong>MongoDB</strong> for flexible-schema content (club profiles, custom fields).</span></li>
+        <li><span><strong>SNS/SQS</strong> as the only cross-service primitive — a missing service degrades, not fails.</span></li>
+    </ul>
+
+    <h2>Key decisions</h2>
+    <ul>
+        <li><span><strong>Serverless for cost and elastic scaling</strong> on a workload that was spiky and tenant-bounded.</span></li>
+        <li><span><strong>Polyglot persistence</strong> — picking the right store per bounded context, not the same DB everywhere.</span></li>
+        <li><span><strong>Async by default, sync only when latency demands it.</strong> A single sync call is a single point of failure; an event is recoverable.</span></li>
+        <li><span><strong>Standardized service template</strong> — every new context started from a Clean Architecture scaffold, so the next engineer always knew where to look.</span></li>
+        <li><span><strong>Feature-based branching strategy</strong> — short-lived branches per feature, fast forward-merge, no long-running integration pain.</span></li>
+    </ul>
+
+    <h2>Outcomes</h2>
+    <ul>
+        <li><span>About <strong>8 hours per week</strong> of process overhead recovered across the team.</span></li>
+        <li><span>Deploys became per-service — a billing change could ship without touching the events pipeline.</span></li>
+        <li><span>Incident blast radius shrank: a failing context could degrade gracefully behind the event bus.</span></li>
+        <li><span>New engineers ramped up faster because the service template made the codebase predictable.</span></li>
+    </ul>
+
+    <h2>Stack</h2>
+    <div class="stack">
+        <span class="tag">Node.js</span>
+        <span class="tag">TypeScript</span>
+        <span class="tag">AWS Lambda</span>
+        <span class="tag">API Gateway</span>
+        <span class="tag">DynamoDB</span>
+        <span class="tag">MongoDB</span>
+        <span class="tag">SNS / SQS</span>
+        <span class="tag">DDD</span>
+        <span class="tag">Clean Architecture</span>
+        <span class="tag">Jest</span>
+    </div>
+</CaseStudyLayout>
