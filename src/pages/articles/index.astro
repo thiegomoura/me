@@ -1,11 +1,17 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { readingTime, formatReadingTime } from '../../utils/reading-time';
 
 const allArticles = await getCollection('articles');
 const articles = allArticles
     .filter((a) => !a.data.draft)
-    .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+    .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+    .map((a) => ({
+        ...a,
+        date: a.data.pubDate.toISOString().slice(0, 10),
+        time: formatReadingTime(readingTime(a.body ?? '')),
+    }));
 ---
 <BaseLayout title="Articles" pageClass="page-articles">
     <header class="page-header reveal">
@@ -28,7 +34,11 @@ const articles = allArticles
                 {articles.map((a) => (
                     <li>
                         <a href={`/articles/${a.id.replace(/\.md$/, '')}/`} class="article-link">
-                            <span class="article-date mono">{a.data.pubDate.toISOString().slice(0, 10)}</span>
+                            <span class="article-date mono">
+                                {a.date}
+                                <span class="article-meta-sep"> · </span>
+                                {a.time}
+                            </span>
                             <span class="article-title">{a.data.title}</span>
                             <span class="article-desc">{a.data.description}</span>
                             {a.data.tags.length > 0 && (
