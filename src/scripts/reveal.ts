@@ -1,6 +1,8 @@
 export function initReveal() {
     if (typeof window === 'undefined') return;
 
+    document.documentElement.classList.add('js-ready');
+
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const targets = document.querySelectorAll<HTMLElement>('.reveal');
     if (!targets.length) return;
