@@ -393,6 +393,42 @@ section,
     box-shadow: 0 6px 18px rgba(34, 197, 94, 0.06);
 }
 
+.hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+    width: 100%;
+    margin: 0.5rem 0 0.5rem;
+}
+
+.hero-stats .stat {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0.2rem;
+    padding: 0.95rem 1.05rem;
+    border-radius: 1rem;
+    border: 1px solid var(--border-color);
+    background: linear-gradient(180deg, rgba(52, 211, 153, 0.08), transparent 70%), var(--surface-elevated);
+    text-align: left;
+}
+
+.hero-stats .stat-value {
+    font-size: clamp(1.2rem, 1.6vw, 1.55rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--color-green);
+    line-height: 1.1;
+}
+
+.hero-stats .stat-label {
+    font-size: 0.82rem;
+    color: var(--font-muted);
+    font-weight: 500;
+    line-height: 1.35;
+}
+
 .hero-stack {
     display: flex;
     flex-wrap: wrap;
@@ -669,6 +705,109 @@ section,
     margin-top: auto;
 }
 
+.project-card__diagram {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    padding: 0.75rem;
+    border-radius: 0.75rem;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(52, 211, 153, 0.18), transparent 60%),
+        radial-gradient(circle at 80% 80%, rgba(56, 189, 248, 0.16), transparent 60%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 60%),
+        var(--surface-elevated);
+    border: 1px solid var(--border-color);
+    flex-wrap: wrap;
+}
+
+.project-card__diagram .diagram-node {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.4rem 0.7rem;
+    border-radius: 0.5rem;
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--font-color);
+    letter-spacing: 0.02em;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+}
+
+.project-card__diagram .diagram-arrow {
+    color: var(--color-green);
+    font-weight: 800;
+    font-size: 1rem;
+}
+
+.project-card__diagram .diagram-node--bad {
+    border-color: rgba(239, 68, 68, 0.5);
+    color: #fca5a5;
+}
+
+.project-card__diagram .diagram-node--ok {
+    border-color: rgba(52, 211, 153, 0.55);
+    color: var(--color-green);
+}
+
+.project-card__metric {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 0.85rem auto 0.25rem;
+    padding: 0.55rem 0.9rem;
+    border-radius: 999px;
+    background: rgba(52, 211, 153, 0.1);
+    border: 1px solid rgba(52, 211, 153, 0.3);
+    width: fit-content;
+}
+
+.project-card__metric .metric-value {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--color-green);
+    letter-spacing: -0.01em;
+}
+
+.project-card__metric .metric-label {
+    font-size: 0.8rem;
+    color: var(--font-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.card-link-primary {
+    width: auto !important;
+    height: auto !important;
+    padding: 0.55rem 1.1rem !important;
+    border-radius: 999px !important;
+    display: inline-flex !important;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--font-color) !important;
+    background: var(--surface-elevated) !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+.card-link-primary i {
+    font-size: 1rem;
+}
+
+.card-link-primary:hover {
+    background: rgba(52, 211, 153, 0.14) !important;
+    border-color: rgba(52, 211, 153, 0.4) !important;
+    color: var(--font-color) !important;
+    transform: translateY(-2px);
+}
+
 @media (hover: hover) and (pointer: fine) {
 
     .skill-group,
@@ -756,6 +895,220 @@ section,
     opacity: 0.7;
 }
 
+.case-study,
+.adr-list {
+    max-width: 880px;
+    margin: 0 auto 4rem;
+    padding: 0 0.5rem;
+}
+
+.case-study-header {
+    text-align: left;
+    margin-bottom: 1.75rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.case-study-tag {
+    display: inline-block;
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    background: rgba(52, 211, 153, 0.12);
+    border: 1px solid rgba(52, 211, 153, 0.32);
+    color: var(--color-green);
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.85rem;
+}
+
+.case-study-header h1 {
+    font-size: clamp(1.7rem, 3vw, 2.4rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--font-color);
+    margin: 0 0 0.5rem;
+}
+
+.case-study-subtitle {
+    color: var(--font-muted);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin: 0 0 1rem;
+}
+
+.case-study-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+.case-study-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.75rem;
+    border-radius: 999px;
+    background: var(--surface-elevated);
+    border: 1px solid var(--border-color);
+    color: var(--font-color);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.case-study-meta i {
+    color: var(--color-green);
+}
+
+.case-study-section {
+    margin-bottom: 1.75rem;
+}
+
+.case-study-section h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--font-color);
+    margin: 0 0 0.6rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px dashed var(--border-color);
+}
+
+.case-study-section p,
+.case-study-section li {
+    color: var(--font-muted);
+    line-height: 1.8;
+    font-size: 0.98rem;
+}
+
+.case-study-section ul {
+    padding-left: 1.2rem;
+    margin-bottom: 0;
+}
+
+.case-study-section strong {
+    color: var(--font-color);
+}
+
+.case-study-architecture {
+    margin: 1rem 0 1.5rem;
+    padding: 1.5rem 1rem;
+    border-radius: 1rem;
+    border: 1px solid var(--border-color);
+    background:
+        linear-gradient(180deg, rgba(52, 211, 153, 0.04), transparent 60%),
+        var(--surface-elevated);
+    text-align: center;
+}
+
+.case-study-architecture svg {
+    max-width: 100%;
+    height: auto;
+}
+
+.case-study-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+.case-study-stack .badge {
+    background: var(--surface-elevated) !important;
+    border: 1px solid var(--border-color);
+    color: var(--font-color);
+    font-weight: 600;
+}
+
+.case-study-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.adr {
+    padding: 1.5rem 1.6rem;
+    margin-bottom: 1.25rem;
+    background: var(--surface-color);
+    border: 1px solid var(--border-color) !important;
+    border-left: 4px solid rgba(52, 211, 153, 0.55) !important;
+    border-radius: 1rem;
+    box-shadow: 0 14px 40px var(--shadow-color);
+}
+
+.adr h2 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--font-color);
+    margin: 0 0 0.4rem;
+}
+
+.adr-meta {
+    display: inline-block;
+    margin: 0 0 0.85rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    background: var(--surface-elevated);
+    color: var(--color-green);
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.adr h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--font-color);
+    margin: 1rem 0 0.4rem;
+}
+
+.adr p,
+.adr li {
+    color: var(--font-muted);
+    line-height: 1.75;
+    font-size: 0.96rem;
+    margin-bottom: 0.4rem;
+}
+
+.adr ul {
+    padding-left: 1.2rem;
+    margin-bottom: 0;
+}
+
+.adr-intro {
+    max-width: 880px;
+    margin: 0 auto 1.75rem;
+    color: var(--font-muted);
+    line-height: 1.8;
+    text-align: left;
+}
+
+.page-intro {
+    max-width: 880px;
+    margin: 0 auto 2rem;
+    padding: 0 0.5rem;
+}
+
+.page-intro h1 {
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--font-color);
+    margin: 0 0 0.6rem;
+}
+
+.page-intro p {
+    color: var(--font-muted);
+    line-height: 1.8;
+    font-size: 1rem;
+}
+
 @media (max-width: 576px) {
     body {
         font-size: 0.98rem;
@@ -795,6 +1148,10 @@ section,
 
     .hero-social {
         flex-direction: column;
+    }
+
+    .hero-stats {
+        grid-template-columns: 1fr;
     }
 
     .hero-social a,

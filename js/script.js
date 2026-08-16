@@ -131,7 +131,7 @@ function toggleTheme() {
     }
 
     registerReveal(
-        "#profile, #skills .skill-summary, #skills .skill-group, #projects .project-intro, #projects .project-card, #timeline .title",
+        "#profile, #skills .skill-summary, #skills .skill-group, #projects .project-intro, #projects .project-card, #timeline .title, .hero-stats .stat, .case-study-header, .case-study-section, .adr, .page-intro",
     );
 
     fetch("./data/timeline.json")

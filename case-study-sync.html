@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" class="theme-dark">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="shortcut icon" type="imagem/x-icon" href="favicon.ico" />
+    <link href="styles.css" rel="stylesheet">
+    <title>Generic Offline-First Sync — Case Study</title>
+</head>
+
+<body class=" d-flex flex-column align-content-around">
+    <header class="position-fixed w-100">
+        <nav class="container navbar navbar-expand-lg">
+            <a class="navbar-brand" href="./index.html">
+                <img id="site-logo" src="./img/logo-dark.svg" data-logo-dark="./img/logo-dark.svg" data-logo-light="./img/logo-light.svg" alt="Logo" class="rounded logo">
+                <span>Thiego Moura</span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./projects.html">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./index.html#skills">Skills</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./adrs.html">ADRs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./index.html#timeline">Experience</a>
+                    </li>
+                </ul>
+            </div>
+            <button id="theme" type="button" class="theme-toggle px-4 ml-auto" aria-label="Toggle theme"
+                title="Toggle theme" onclick="toggleTheme()">
+                <i class="bi" aria-hidden="true"></i>
+            </button>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="bi bi-list"></i>
+            </button>
+        </nav>
+    </header>
+    <main class="container py-3">
+        <article class="case-study">
+            <header class="case-study-header">
+                <span class="case-study-tag">Backend Platform</span>
+                <h1>Generic Offline-First Sync Service</h1>
+                <p class="case-study-subtitle">A table-agnostic sync engine that eliminated per-feature custom logic and powered offline clients across the product.</p>
+                <div class="case-study-meta">
+                    <span><i class="bi bi-building"></i> Ioasys</span>
+                    <span><i class="bi bi-calendar3"></i> 2023</span>
+                    <span><i class="bi bi-graph-up-arrow"></i> −90% sync-related defects</span>
+                    <span><i class="bi bi-people"></i> Cross-team reuse</span>
+                </div>
+            </header>
+
+            <section class="case-study-section">
+                <h2>Context</h2>
+                <p>The product had grown into a multi-module application where each new offline-capable feature required its own sync implementation. The result was N slightly different sync pipelines, each with its own bugs, its own conflict-resolution quirks, and its own operational story. Every new feature started with a one-to-two-week "build the sync" tax before product work could even begin.</p>
+                <p>Worse, conflicts surfaced inconsistently: some clients would silently lose data, others would refuse to apply deltas, and on-call had no shared observability story to debug from.</p>
+            </section>
+
+            <section class="case-study-section">
+                <h2>Problem</h2>
+                <ul>
+                    <li>Every offline feature re-implemented deltas, conflict resolution, and retry logic.</li>
+                    <li>Sync bugs were the single largest source of customer-reported issues.</li>
+                    <li>Engineering velocity was capped by sync complexity, not product complexity.</li>
+                    <li>No shared observability — every team wrote its own logging and metrics.</li>
+                </ul>
+            </section>
+
+            <section class="case-study-section">
+                <h2>Approach</h2>
+                <p>I designed a single, schema-driven sync engine that any module could plug into. Instead of writing sync code per table, a feature owner declares the schema (table name, version column, soft-delete flag, conflict policy) and gets a working sync pipeline — push, pull, delta application, conflict resolution — for free.</p>
+                <p>Internally, the engine is a NestJS module with three layers: a transport-agnostic sync core (pure TypeScript, easy to test), a Postgres adapter using a generic CRUD abstraction, and a thin HTTP boundary that accepts batched changes from clients.</p>
+            </section>
+
+            <section class="case-study-section">
+                <h2>Architecture</h2>
+                <div class="case-study-architecture">
+                    <svg viewBox="0 0 760 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Offline-first sync architecture">
+                        <defs>
+                            <marker id="arrow-sync" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                <path d="M0,0 L10,5 L0,10 z" fill="#34d399" />
+                            </marker>
+                        </defs>
+                        <g font-family="Inter, system-ui, sans-serif" font-size="13" fill="#f8fafc">
+                            <rect x="20" y="40" width="150" height="60" rx="10" fill="#111827" stroke="#34d399" />
+                            <text x="95" y="68" text-anchor="middle" font-weight="700">Mobile Client</text>
+                            <text x="95" y="86" text-anchor="middle" fill="#cbd5e1">Local store + queue</text>
+
+                            <rect x="240" y="40" width="180" height="60" rx="10" fill="#111827" stroke="#34d399" />
+                            <text x="330" y="68" text-anchor="middle" font-weight="700">Sync API (NestJS)</text>
+                            <text x="330" y="86" text-anchor="middle" fill="#cbd5e1">batch + delta + conflicts</text>
+
+                            <rect x="490" y="40" width="150" height="60" rx="10" fill="#111827" stroke="#34d399" />
+                            <text x="565" y="68" text-anchor="middle" font-weight="700">PostgreSQL</text>
+                            <text x="565" y="86" text-anchor="middle" fill="#cbd5e1">versioned rows</text>
+
+                            <rect x="240" y="140" width="180" height="50" rx="10" fill="#1e293b" stroke="#64748b" />
+                            <text x="330" y="170" text-anchor="middle" font-weight="600" fill="#cbd5e1">Conflict Resolver</text>
+
+                            <line x1="170" y1="70" x2="240" y2="70" stroke="#34d399" stroke-width="2" marker-end="url(#arrow-sync)" />
+                            <line x1="420" y1="70" x2="490" y2="70" stroke="#34d399" stroke-width="2" marker-end="url(#arrow-sync)" />
+                            <line x1="330" y1="100" x2="330" y2="140" stroke="#34d399" stroke-width="2" marker-end="url(#arrow-sync)" />
+                            <line x1="565" y1="100" x2="565" y2="190" stroke="#64748b" stroke-width="2" stroke-dasharray="4 4" />
+                        </g>
+                    </svg>
+                </div>
+                <ul>
+                    <li><strong>Client side:</strong> a thin offline store queues local mutations and ships them as batched deltas.</li>
+                    <li><strong>Sync API:</strong> stateless, accepts a batch + cursor, returns server-side deltas since cursor, applies client deltas inside a single transaction.</li>
+                    <li><strong>Conflict resolver:</strong> pluggable per schema — last-write-wins by default, configurable for stricter rules.</li>
+                    <li><strong>Postgres:</strong> every synced table carries a <code>version</code> column and an <code>updated_at</code> cursor; the engine never hardcodes schema.</li>
+                </ul>
+            </section>
+
+            <section class="case-study-section">
+                <h2>Key decisions</h2>
+                <ul>
+                    <li><strong>Schema-driven, not code-generated.</strong> Generating code per table would have been the obvious move, but it pushes complexity to the client side. A schema registry lets the same engine handle a new table with zero new code.</li>
+                    <li><strong>Optimistic concurrency, not pessimistic locking.</strong> Version columns are cheap and the offline use case demands that writes never block on a remote lock.</li>
+                    <li><strong>Cursor-based deltas, not full snapshots.</strong> A monotonic server cursor keeps payloads small and lets clients resume cleanly after long offline windows.</li>
+                    <li><strong>Observability baked in.</strong> Every batch emits per-table counters (received, applied, conflicts, retried) into the same metrics pipeline — no per-team instrumentation needed.</li>
+                </ul>
+            </section>
+
+            <section class="case-study-section">
+                <h2>Outcomes</h2>
+                <ul>
+                    <li>Sync-related defects dropped by ~90% in the quarter after rollout.</li>
+                    <li>New offline features went from a 1–2 week tax to a same-day integration.</li>
+                    <li>~8 hours of engineering time per week recovered across the team.</li>
+                    <li>On-call gained a single dashboard to debug any sync incident, regardless of which module triggered it.</li>
+                </ul>
+            </section>
+
+            <section class="case-study-section">
+                <h2>Stack</h2>
+                <div class="case-study-stack">
+                    <span class="badge">Nest.js</span>
+                    <span class="badge">TypeScript</span>
+                    <span class="badge">PostgreSQL</span>
+                    <span class="badge">Azure App Service</span>
+                    <span class="badge">Clean Architecture</span>
+                    <span class="badge">DDD</span>
+                    <span class="badge">Vitest</span>
+                </div>
+            </section>
+
+            <div class="case-study-cta">
+                <a href="./projects.html" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> All case studies</a>
+                <a href="./adrs.html" class="btn btn-outline-light"><i class="bi bi-journal-code"></i> Read the related ADRs</a>
+            </div>
+        </article>
+    </main>
+    <p></p>
+    <footer class="footer mt-auto py-4 px-3 text-center">
+      <div class="container d-flex flex-column align-items-center">
+        <img id="site-logo-footer" src="./img/logo-dark.svg" data-logo-dark="./img/logo-dark.svg" data-logo-light="./img/logo-light.svg" alt="Logo TM" class="logo-footer mb-3" />
+        <span class="footer-text">&copy; TM 2026 – All rights reserved.</span>
+      </div>
+    </footer>
+</body>
+<script src="./js/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+
+</html>
