@@ -1,0 +1,121 @@
+---
+interface Props {
+    slug: string;
+    title: string;
+    context: string;
+    period: string;
+    tags: string[];
+    summary: string;
+    metricValue: string;
+    metricLabel: string;
+}
+
+const { slug, title, context, period, tags, summary, metricValue, metricLabel } = Astro.props;
+---
+<article class="project-card reveal">
+    <header class="project-card__head">
+        <div>
+            <h3 class="project-card__title">{title}</h3>
+            <p class="project-card__context mono">{context} · {period}</p>
+        </div>
+        <span class="metric">
+            <span class="metric-value">{metricValue}</span>
+            <span class="metric-label">{metricLabel}</span>
+        </span>
+    </header>
+    <p class="project-card__summary">{summary}</p>
+    <ul class="project-card__tags">
+        {tags.map((tag) => <li class="mono">{tag}</li>)}
+    </ul>
+    <a class="project-card__link" href={`/${slug}`}>
+        <span>Read case study</span>
+        <span class="project-card__arrow">→</span>
+    </a>
+</article>
+
+<style>
+    .project-card {
+        padding: 1.5rem 0;
+        border-top: 1px solid var(--hairline);
+    }
+
+    .project-card:first-of-type {
+        border-top: 0;
+        padding-top: 0.5rem;
+    }
+
+    .project-card__head {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 1.5rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .project-card__title {
+        font-size: 1.15rem;
+        font-weight: 600;
+        margin-bottom: 0.2rem;
+    }
+
+    .project-card__context {
+        font-size: 0.74rem;
+        color: var(--text-dim);
+        margin: 0;
+        letter-spacing: 0.04em;
+    }
+
+    .project-card__summary {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        color: var(--text-muted);
+        margin: 0 0 0.9rem;
+    }
+
+    .project-card__tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.3rem 0.4rem;
+        list-style: none;
+        margin: 0 0 1rem;
+        padding: 0;
+    }
+
+    .project-card__tags li {
+        font-size: 0.72rem;
+        color: var(--text-muted);
+        padding: 0.15em 0.5em;
+        border: 1px solid var(--border);
+    }
+
+    .project-card__link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5em;
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        color: var(--text);
+        padding-bottom: 1px;
+        border-bottom: 1px solid var(--text);
+    }
+
+    .project-card__link:hover {
+        color: var(--text-muted);
+        border-bottom-color: var(--text-muted);
+    }
+
+    .project-card__arrow {
+        transition: transform var(--duration) var(--ease);
+    }
+
+    .project-card__link:hover .project-card__arrow {
+        transform: translateX(3px);
+    }
+
+    @media (max-width: 640px) {
+        .project-card__head {
+            flex-direction: column;
+            gap: 0.7rem;
+        }
+    }
+</style>

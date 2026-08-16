@@ -1,0 +1,86 @@
+---
+import timeline from '../data/timeline.json';
+
+interface TimelineEvent {
+    organization?: string;
+    description: string;
+}
+
+interface TimelineYear {
+    year: string;
+    events: TimelineEvent[];
+}
+
+const data = timeline as TimelineYear[];
+---
+<div class="timeline">
+    {
+        data.map((entry) => (
+            <div class="timeline-row">
+                <div class="timeline-year mono">{entry.year}</div>
+                <ul class="timeline-events">
+                    {entry.events.map((event) => (
+                        <li>
+                            {event.organization && <strong class="timeline-org">{event.organization}</strong>}
+                            <span class="timeline-desc">{event.description}</span>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        ))
+    }
+</div>
+
+<style>
+    .timeline {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .timeline-row {
+        display: grid;
+        grid-template-columns: 5ch 1fr;
+        gap: 1rem;
+        padding: 0.85rem 0;
+        border-top: 1px solid var(--hairline);
+        align-items: baseline;
+    }
+
+    .timeline-row:first-child {
+        border-top: 0;
+    }
+
+    .timeline-year {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--text);
+        letter-spacing: 0;
+    }
+
+    .timeline-events {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+    }
+
+    .timeline-events li {
+        font-size: 0.92rem;
+        color: var(--text-muted);
+        line-height: 1.55;
+    }
+
+    .timeline-org {
+        color: var(--text);
+        font-weight: 600;
+        margin-right: 0.4em;
+    }
+
+    @media (max-width: 640px) {
+        .timeline-row {
+            grid-template-columns: 4ch 1fr;
+        }
+    }
+</style>

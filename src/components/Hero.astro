@@ -1,0 +1,97 @@
+---
+interface Props {
+    title: string;
+    intro: string;
+    stats: { value: string; label: string }[];
+}
+
+const { title, intro, stats } = Astro.props;
+---
+<section class="hero">
+    <h1 class="hero-title">{title}</h1>
+    <p class="hero-intro">{intro}</p>
+    <div class="hero-stats">
+        {
+            stats.map((stat) => (
+                <div class="stat">
+                    <span class="stat-value mono">{stat.value}</span>
+                    <span class="stat-label">{stat.label}</span>
+                </div>
+            ))
+        }
+    </div>
+</section>
+
+<style>
+    .hero {
+        padding: calc(var(--gutter) * 1.2) 0 calc(var(--gutter) * 2);
+        border-bottom: 1px solid var(--hairline);
+    }
+
+    .hero-title {
+        font-size: clamp(1.9rem, 4vw, 3rem);
+        line-height: 1.1;
+        letter-spacing: -0.035em;
+        font-weight: 700;
+        max-width: 22ch;
+        margin-bottom: 1.2rem;
+    }
+
+    .hero-intro {
+        font-size: clamp(1.05rem, 1.4vw, 1.18rem);
+        line-height: 1.65;
+        color: var(--text-muted);
+        max-width: 56ch;
+        margin-bottom: 2.2rem;
+    }
+
+    .hero-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 0;
+        border-top: 1px solid var(--hairline);
+        border-bottom: 1px solid var(--hairline);
+    }
+
+    .stat {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+        padding: 1.2rem 1rem;
+        border-right: 1px solid var(--hairline);
+    }
+
+    .stat:last-child {
+        border-right: 0;
+    }
+
+    .stat-value {
+        font-size: clamp(1.6rem, 2.2vw, 2rem);
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        color: var(--text);
+        line-height: 1;
+    }
+
+    .stat-label {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--text-dim);
+        letter-spacing: 0.02em;
+    }
+
+    @media (max-width: 640px) {
+        .hero-stats {
+            grid-template-columns: 1fr;
+        }
+
+        .stat {
+            border-right: 0;
+            border-bottom: 1px solid var(--hairline);
+        }
+
+        .stat:last-child {
+            border-bottom: 0;
+        }
+    }
+</style>

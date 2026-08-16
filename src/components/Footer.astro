@@ -1,0 +1,56 @@
+---
+const year = new Date().getFullYear();
+---
+<footer class="footer">
+    <div class="footer-inner">
+        <p class="footer-copy">© {year} Thiego Moura — built with Astro, deployed via GitHub Pages.</p>
+        <ul class="footer-links">
+            <li><a href="https://github.com/thiegomoura" target="_blank" rel="noopener noreferrer">github</a></li>
+            <li><a href="https://www.linkedin.com/in/thiegomoura/" target="_blank" rel="noopener noreferrer">linkedin</a></li>
+            <li><a href="mailto:thiegormoura@gmail.com">email</a></li>
+        </ul>
+    </div>
+</footer>
+
+<style>
+    .footer {
+        border-top: 1px solid var(--hairline);
+        margin-top: var(--section-gap);
+        padding: calc(var(--gutter) * 1.2) 0;
+    }
+
+    .footer-inner {
+        width: min(1100px, calc(100% - 2 * var(--gutter)));
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem 1.2rem;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .footer-copy {
+        margin: 0;
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--text-dim);
+    }
+
+    .footer-links {
+        display: flex;
+        gap: 0.8rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .footer-links a {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--text-muted);
+    }
+
+    .footer-links a:hover {
+        color: var(--text);
+    }
+</style>

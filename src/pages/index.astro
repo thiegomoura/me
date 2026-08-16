@@ -1,16 +1,154 @@
 ---
----
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import SkillGroup from '../components/SkillGroup.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import Timeline from '../components/Timeline.astro';
 
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Thiego.dev — scaffold</title>
-    </head>
-    <body>
-        <main>
-            <h1>thiego.dev · astro scaffold</h1>
-            <p>Astro is wired up. Content port begins in the next phase.</p>
-        </main>
-    </body>
-</html>
+const stats = [
+    { value: '5+ years', label: 'building production backends' },
+    { value: '30+ APIs', label: 'in production today' },
+    { value: '99.95%', label: 'SLA maintained' },
+];
+
+const deliverables = [
+    'Cut a critical endpoint from 8s to 0.9s — ~90% latency reduction through query rewrites and caching.',
+    'Took CI from 20min to 12min and added obfuscation + minification across the pipeline.',
+    'Designed a generic, table-agnostic offline-first sync service used across multiple product modules.',
+    'Architect with Clean Architecture and DDD — I ship code that other engineers want to read.',
+];
+
+const skills = [
+    {
+        title: 'Languages & Runtimes',
+        level: 'Daily use',
+        items: ['TypeScript', 'JavaScript', 'Node.js', 'Python', 'Shell'],
+    },
+    {
+        title: 'Backend & APIs',
+        level: 'Primary stack',
+        items: ['Nest.js', 'Express', 'Fastify', 'REST', 'GraphQL', 'gRPC', 'Clean Architecture', 'DDD'],
+    },
+    {
+        title: 'Data & Messaging',
+        level: 'Production',
+        items: ['PostgreSQL', 'MongoDB', 'Redis', 'BullMQ', 'RabbitMQ', 'DynamoDB', 'pgvector', 'Qdrant'],
+    },
+    {
+        title: 'Cloud & Delivery',
+        level: 'Hands-on',
+        items: ['AWS', 'Azure', 'Docker', 'Kubernetes', 'Terraform', 'Lambda', 'CI/CD', 'GitHub Actions'],
+    },
+    {
+        title: 'Observability & Quality',
+        level: 'Operate what you ship',
+        items: ['OpenTelemetry', 'Prometheus', 'Grafana', 'Jest', 'Vitest', 'Supertest', 'Mocha'],
+    },
+    {
+        title: 'Security & AI',
+        level: 'Edge-to-app',
+        items: ['Helmet', 'Rate Limiting', 'OAuth2 / OIDC', 'JWT', 'OWASP', 'OpenAI SDK', 'Anthropic SDK'],
+    },
+];
+
+const projects = [
+    {
+        slug: 'case-study-sync',
+        title: 'Generic Offline-First Sync',
+        context: 'Ioasys',
+        period: '2023',
+        tags: ['Nest.js', 'TypeScript', 'PostgreSQL', 'Azure'],
+        summary:
+            'A table-agnostic sync engine that eliminated per-feature custom logic and powered offline clients across the product.',
+        metricValue: '−90%',
+        metricLabel: 'sync defects',
+    },
+    {
+        slug: 'case-study-perf',
+        title: 'Critical-Path Query Rewrites',
+        context: 'Ioasys',
+        period: '2024',
+        tags: ['PostgreSQL', 'Redis', 'Nest.js', 'CI/CD'],
+        summary:
+            'Cut a critical-path endpoint from 8s to 0.9s and trimmed CI from 20min to 12min with obfuscation and minification.',
+        metricValue: '−89%',
+        metricLabel: 'P95 latency',
+    },
+    {
+        slug: 'case-study-platform',
+        title: 'Serverless Club Platform',
+        context: 'iClubs',
+        period: '2021–2023',
+        tags: ['Node.js', 'TypeScript', 'AWS Lambda', 'DynamoDB', 'MongoDB'],
+        summary:
+            'A serverless microservices platform on AWS with Lambda, DynamoDB, and MongoDB — DDD and Clean Architecture from day one.',
+        metricValue: '8h/wk',
+        metricLabel: 'team time saved',
+    },
+];
+---
+<BaseLayout title="thiego.dev" pageClass="page-home">
+    <Hero
+        title="I build backend systems that handle millions of requests without paging me at 3 AM."
+        intro="Backend Software Engineer — Node.js · Nest.js · TypeScript · Cloud-native (AWS & Azure). I design, ship, and operate the services that other teams depend on."
+        stats={stats}
+    />
+
+    <section class="section">
+        <h2 class="section-title">What I deliver</h2>
+        <ul class="marker-list">
+            {deliverables.map((item) => <li><span>{item}</span></li>)}
+        </ul>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">Skills</h2>
+        <div class="skills-grid">
+            {skills.map((group) => <SkillGroup {...group} />)}
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">Selected projects</h2>
+        <div class="projects-list">
+            {projects.map((project) => <ProjectCard {...project} />)}
+        </div>
+        <p class="section-cta">
+            <a class="btn btn--ghost" href="/adrs">Read architecture decisions →</a>
+        </p>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">Experience</h2>
+        <Timeline />
+    </section>
+</BaseLayout>
+
+<style>
+    .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0 2rem;
+    }
+
+    .skills-grid :global(.skill-group) {
+        border-top: 0;
+        padding: 0.85rem 0;
+        border-bottom: 1px solid var(--hairline);
+    }
+
+    .projects-list {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .section-cta {
+        margin-top: 1.5rem;
+    }
+
+    @media (max-width: 720px) {
+        .skills-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

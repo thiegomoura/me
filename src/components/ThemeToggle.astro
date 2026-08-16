@@ -1,0 +1,63 @@
+---
+---
+<button
+    id="theme-toggle"
+    class="theme-toggle"
+    type="button"
+    aria-label="Toggle theme"
+    title="Toggle theme"
+>
+    <span class="theme-toggle__icon" data-theme-icon>◐</span>
+</button>
+
+<script is:inline>
+    (function () {
+        var btn = document.getElementById('theme-toggle');
+        var icon = btn && btn.querySelector('[data-theme-icon]');
+        if (!btn) return;
+
+        function paint(theme) {
+            document.documentElement.className = theme;
+            if (icon) {
+                icon.textContent = theme === 'theme-dark' ? '◑' : '◐';
+            }
+            btn.setAttribute(
+                'aria-label',
+                theme === 'theme-dark' ? 'Switch to light theme' : 'Switch to dark theme',
+            );
+            btn.setAttribute(
+                'title',
+                theme === 'theme-dark' ? 'Switch to light theme' : 'Switch to dark theme',
+            );
+        }
+
+        paint(document.documentElement.className || 'theme-dark');
+
+        btn.addEventListener('click', function () {
+            var next =
+                document.documentElement.className === 'theme-dark' ? 'theme-light' : 'theme-dark';
+            try {
+                localStorage.setItem('theme', next);
+            } catch (e) {}
+            paint(next);
+        });
+    })();
+</script>
+
+<style>
+    .theme-toggle {
+        background: transparent;
+        border: 1px solid var(--border);
+        color: var(--text);
+        padding: 0.4em 0.6em;
+        cursor: pointer;
+        font-size: 0.95rem;
+        line-height: 1;
+        transition: border-color var(--duration) var(--ease), background-color var(--duration) var(--ease);
+    }
+
+    .theme-toggle:hover {
+        border-color: var(--text-dim);
+        background: var(--surface);
+    }
+</style>

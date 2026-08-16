@@ -1,0 +1,70 @@
+---
+interface Props {
+    title: string;
+    level: string;
+    items: string[];
+}
+
+const { title, level, items } = Astro.props;
+---
+<div class="skill-group reveal">
+    <header class="skill-group__head">
+        <h3 class="skill-group__title">{title}</h3>
+        <span class="skill-group__level mono">{level}</span>
+    </header>
+    <ul class="skill-group__list">
+        {
+            items.map((item) => (
+                <li class="skill-group__item mono">{item}</li>
+            ))
+        }
+    </ul>
+</div>
+
+<style>
+    .skill-group {
+        padding: 1.1rem 0;
+        border-top: 1px solid var(--hairline);
+    }
+
+    .skill-group:first-of-type {
+        border-top: 0;
+    }
+
+    .skill-group__head {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: 0.85rem;
+    }
+
+    .skill-group__title {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--text);
+    }
+
+    .skill-group__level {
+        font-size: 0.7rem;
+        color: var(--text-dim);
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+    }
+
+    .skill-group__list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem 0.5rem;
+    }
+
+    .skill-group__item {
+        font-size: 0.78rem;
+        color: var(--text-muted);
+        padding: 0.18em 0.55em;
+        border: 1px solid var(--border);
+    }
+</style>

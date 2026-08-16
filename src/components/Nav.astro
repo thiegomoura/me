@@ -1,0 +1,111 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+    href === '/' ? path === '/' : path === href || path.startsWith(href + '/');
+
+const links = [
+    { href: '/', label: 'Index' },
+    { href: '/projects', label: 'Projects' },
+    { href: '/adrs', label: 'ADRs' },
+];
+---
+<header class="nav-root">
+    <div class="nav-inner">
+        <a class="nav-brand" href="/">
+            <span class="nav-brand__mark">[ tm ]</span>
+            <span class="nav-brand__name">Thiego Moura</span>
+        </a>
+        <nav class="nav-links" aria-label="Primary">
+            {
+                links.map((link) => (
+                    <a
+                        href={link.href}
+                        class:list={['nav-link', { 'is-active': isActive(link.href) }]}
+                    >
+                        {link.label}
+                    </a>
+                ))
+            }
+        </nav>
+        <ThemeToggle />
+    </div>
+</header>
+
+<style>
+    .nav-root {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: color-mix(in oklab, var(--bg) 86%, transparent);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--hairline);
+    }
+
+    .nav-inner {
+        width: min(1100px, calc(100% - 2 * var(--gutter)));
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 0.9rem 0;
+    }
+
+    .nav-brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-weight: 600;
+    }
+
+    .nav-brand__mark {
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        padding: 0.2em 0.45em;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        color: var(--text);
+    }
+
+    .nav-brand__name {
+        font-size: 0.95rem;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 0.4rem;
+        justify-content: center;
+    }
+
+    .nav-link {
+        font-family: var(--font-mono);
+        font-size: 0.82rem;
+        font-weight: 500;
+        padding: 0.35em 0.7em;
+        color: var(--text-muted);
+        border: 1px solid transparent;
+        transition: color var(--duration) var(--ease), border-color var(--duration) var(--ease);
+    }
+
+    .nav-link:hover {
+        color: var(--text);
+    }
+
+    .nav-link.is-active {
+        color: var(--text);
+        border-color: var(--border);
+    }
+
+    @media (max-width: 640px) {
+        .nav-inner {
+            grid-template-columns: 1fr auto;
+        }
+
+        .nav-links {
+            display: none;
+        }
+    }
+</style>
