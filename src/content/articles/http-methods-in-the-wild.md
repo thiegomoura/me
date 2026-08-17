@@ -1,7 +1,7 @@
 ---
 title: "HTTP Methods in the Wild: When to Reach for Each"
 description: "What the spec says, what production teaches, and the idempotency traps that show up in the logs at 3 AM."
-pubDate: 2026-08-16
+pubDate: 2026-08-04
 tags: ["http", "api-design", "rest", "backend"]
 draft: false
 ---
@@ -14,13 +14,13 @@ The HTTP spec defines nine methods, but in production you'll touch five of them 
 
 The decision matrix is short:
 
-| Method | Purpose | Idempotent | Cacheable | Body in request |
-|---|---|---|---|---|
-| `GET` | Read | yes | yes | no |
-| `POST` | Create / action | **no** | no | yes |
-| `PUT` | Replace entire resource | yes | no | yes |
-| `PATCH` | Partial update | depends | no | yes |
-| `DELETE` | Remove | yes | no | usually no |
+| Method   | Purpose                 | Idempotent | Cacheable | Body in request |
+| -------- | ----------------------- | ---------- | --------- | --------------- |
+| `GET`    | Read                    | yes        | yes       | no              |
+| `POST`   | Create / action         | **no**     | no        | yes             |
+| `PUT`    | Replace entire resource | yes        | no        | yes             |
+| `PATCH`  | Partial update          | depends    | no        | yes             |
+| `DELETE` | Remove                  | yes        | no        | usually no      |
 
 Idempotent means: doing it twice has the same effect as doing it once. That's the property that makes retries safe. Network blips, browser refreshes, mobile app re-launches — they all cause duplicate requests. Idempotency is what keeps your system from creating two of everything.
 
@@ -29,6 +29,7 @@ Idempotent means: doing it twice has the same effect as doing it once. That's th
 `GET` is **safe** and **idempotent**. Safe means the request must not change server state. If your `GET /users` sends a welcome email, you've broken the contract, and you're going to spend a weekend explaining it to the security team.
 
 What that buys you:
+
 - Browsers, CDNs, and proxies cache `GET` responses by default
 - Retry on network failure is always safe
 - Pre-fetching, link previews, search engine crawlers all expect `GET` to be safe
@@ -36,6 +37,7 @@ What that buys you:
 Practical rule: if it changes anything on the server — even a counter, even a log line in a way that matters — it's not a `GET`. Use `POST`.
 
 Status codes for `GET`:
+
 - `200 OK` — here's the resource
 - `304 Not Modified` — your cached version is still good (with `ETag` / `If-None-Match`)
 - `404 Not Found` — no such resource
@@ -46,6 +48,7 @@ Status codes for `GET`:
 `POST` is the workhorse. It's not idempotent, which means retrying it is dangerous by default.
 
 Use `POST` when:
+
 - You're creating a new resource and the server assigns the ID
 - The action is non-idempotent (charging a card, sending a notification, starting a workflow)
 - You're tunneling an RPC call through HTTP (search, complex queries, anything that doesn't fit a resource)
@@ -55,10 +58,12 @@ The non-idempotency is the trap. A user clicks "Pay" twice, the network blips, y
 **The fix: idempotency keys.** The client sends a unique key (UUID) in a header, usually `Idempotency-Key`. The server stores the key alongside the result. If the same key comes in again, the server returns the stored result instead of running the action again. Stripe made this famous; now it's table stakes for any payment-adjacent API.
 
 If you can't use idempotency keys (legacy clients, complex flows), at minimum:
+
 - Make the action naturally idempotent (e.g., "set status to X" instead of "advance status")
 - Show the user the result of the first request and disable the button after click
 
 Status codes for `POST`:
+
 - `201 Created` — here's the new resource (with `Location` header pointing to it)
 - `200 OK` — the action ran, returning whatever the convention is (often the resource or just `{ ok: true }`)
 - `202 Accepted` — I queued it, the result isn't ready yet (long-running jobs)
@@ -72,6 +77,7 @@ Status codes for `POST`:
 `PUT` is idempotent. The client sends the complete resource representation, and the server replaces whatever was there with exactly that. If you `PUT` the same payload twice, the second call doesn't change anything.
 
 Use `PUT` when:
+
 - The client knows the full state of the resource
 - You want simple caching: `PUT` is naturally idempotent, so retries are safe
 - The resource is small enough to send in full
@@ -79,6 +85,7 @@ Use `PUT` when:
 Common mistake: using `PUT` for partial updates. If the client only knows a subset of fields, sending `PUT` with those fields will wipe out everything else on the server. This is a classic data-loss bug.
 
 Status codes for `PUT`:
+
 - `200 OK` or `204 No Content` — updated, here's the resource (or nothing, your choice)
 - `404 Not Found` — no resource at that ID
 - `409 Conflict` — concurrent modification, your `If-Match` ETag is stale
@@ -114,6 +121,7 @@ For most CRUD apps, JSON Merge Patch is enough. Reach for JSON Patch when you ne
 My default: JSON Merge Patch for the common case, JSON Patch (`test` op) when the user is editing and I need to detect concurrent edits.
 
 Status codes for `PATCH`:
+
 - `200 OK` — updated, here's the new representation
 - `204 No Content` — updated, no body
 - `409 Conflict` — concurrent modification (your `If-Match` ETag lost the race)
@@ -155,3 +163,4 @@ Distinction worth memorizing: `400` is "I can't parse this", `422` is "I parsed 
 ## Closing
 
 Most of HTTP method design is restraint. The five methods cover nearly every case if you stop reaching for `POST` by default. Add idempotency keys for anything that touches money, status, or notifications. Pick a `PATCH` format and stick with it. Your future on-call self will thank you.
+

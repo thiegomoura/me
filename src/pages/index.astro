@@ -5,6 +5,7 @@ import Hero from '../components/Hero.astro';
 import AsciiPortrait from '../components/AsciiPortrait.astro';
 import SkillGroup from '../components/SkillGroup.astro';
 import ProjectCard from '../components/ProjectCard.astro';
+import { readingTime, formatReadingTime } from '../utils/reading-time';
 
 const stats = [
     { value: '5+ years', label: 'building production backends' },
@@ -33,7 +34,7 @@ const skills = [
     {
         title: 'Data & Messaging',
         level: 'Production',
-        items: ['PostgreSQL', 'MongoDB', 'Redis', 'BullMQ', 'RabbitMQ', 'DynamoDB', 'pgvector', 'Qdrant'],
+        items: ['PostgreSQL', 'MongoDB', 'Redis', 'RabbitMQ', 'DynamoDB'],
     },
     {
         title: 'Cloud & Delivery',
@@ -55,6 +56,7 @@ const skills = [
 const allStudies = await getCollection('case-studies');
 const projects = allStudies
     .sort((a, b) => a.data.order - b.data.order)
+    .slice(0, 1)
     .map((s) => ({
         slug: `case-study/${s.id.replace(/\.md$/, '')}/`,
         title: s.data.title,
@@ -65,13 +67,24 @@ const projects = allStudies
         metricValue: s.data.metric.value,
         metricLabel: s.data.metric.label,
     }));
+
+const allArticles = await getCollection('articles');
+const articles = allArticles
+    .filter((a) => !a.data.draft)
+    .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+    .slice(0, 1)
+    .map((a) => ({
+        ...a,
+        date: a.data.pubDate.toISOString().slice(0, 10),
+        time: formatReadingTime(readingTime(a.body ?? '')),
+    }));
 ---
 <BaseLayout title="thiego.dev" pageClass="page-home">
     <AsciiPortrait />
 
     <Hero
         title="I build backend systems that handle millions of requests without paging me at 3 AM."
-        intro="Backend Software Engineer — Node.js · Nest.js · TypeScript · Cloud-native (AWS & Azure). I design, ship, and operate the services that other teams depend on."
+        intro="Backend Software Engineer — Node.js · Nest.js · TypeScript · Cloud-native (AWS & Azure)."
         stats={stats}
     />
 
@@ -80,6 +93,9 @@ const projects = allStudies
         <ul class="marker-list">
             {deliverables.map((item) => <li><span>{item}</span></li>)}
         </ul>
+        <p class="section-cta">
+            <a class="btn btn--ghost" href="/experience">See full experience →</a>
+        </p>
     </section>
 
     <section class="section">
@@ -90,20 +106,45 @@ const projects = allStudies
     </section>
 
     <section class="section">
+        <h2 class="section-title">Select Articles</h2>
+        {articles.length === 0 ? (
+            <p class="empty mono">no articles published yet</p>
+        ) : (
+            <ul class="articles-list">
+                {articles.map((a) => (
+                    <li>
+                        <a href={`/articles/${a.id.replace(/\.md$/, '')}/`} class="article-link">
+                            <span class="article-date mono">
+                                {a.date}
+                                <span class="article-meta-sep"> · </span>
+                                {a.time}
+                            </span>
+                            <span class="article-title">{a.data.title}</span>
+                            <span class="article-desc">{a.data.description}</span>
+                            {a.data.tags.length > 0 && (
+                                <span class="article-tags mono">
+                                    {a.data.tags.map((t) => `#${t}`).join(' ')}
+                                </span>
+                            )}
+                        </a>
+                    </li>
+                ))}
+            </ul>
+        )}
+        <p class="section-cta">
+            <a class="btn btn--ghost" href="/articles">See all articles →</a>
+        </p>
+    </section>
+
+    <section class="section">
         <h2 class="section-title">Selected projects</h2>
         <div class="projects-list">
             {projects.map((project) => <ProjectCard {...project} />)}
         </div>
         <p class="section-cta">
-            <a class="btn btn--ghost" href="/adrs">Read architecture decisions →</a>
+            <a class="btn btn--ghost" href="/projects">See all projects →</a>
         </p>
-    </section>
-
-    <section class="section">
-        <h2 class="section-title">Experience</h2>
-        <p class="section-cta">
-            <a class="btn btn--ghost" href="/experience">See full experience →</a>
-        </p>
+        <a class="btn btn--ghost" href="/adrs">Read architecture decisions →</a>
     </section>
 </BaseLayout>
 

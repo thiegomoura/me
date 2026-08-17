@@ -1,7 +1,7 @@
 ---
 title: "The Encrypted SQLite File That Wouldn't Open: A Windows/Mac Postmortem"
 description: "A base created on Windows with better-sqlite3-multiple-ciphers 8.5.0 refused to open on macOS with 8.7.0. Same passphrase, same schema, different result. Root cause, the fix, and the format-version header every encrypted file should carry."
-pubDate: 2026-08-17
+pubDate: 2026-08-15
 tags: ["sqlite", "encryption", "nodejs", "ops", "security"]
 draft: false
 ---
