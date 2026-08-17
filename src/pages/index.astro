@@ -5,7 +5,6 @@ import Hero from '../components/Hero.astro';
 import AsciiPortrait from '../components/AsciiPortrait.astro';
 import SkillGroup from '../components/SkillGroup.astro';
 import ProjectCard from '../components/ProjectCard.astro';
-import Timeline from '../components/Timeline.astro';
 
 const stats = [
     { value: '5+ years', label: 'building production backends' },
@@ -102,7 +101,9 @@ const projects = allStudies
 
     <section class="section">
         <h2 class="section-title">Experience</h2>
-        <Timeline />
+        <p class="section-cta">
+            <a class="btn btn--ghost" href="/experience">See full experience →</a>
+        </p>
     </section>
 </BaseLayout>
 

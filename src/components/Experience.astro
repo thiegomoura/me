@@ -1,0 +1,291 @@
+---
+interface ExperienceEntry {
+    company: string;
+    role: string;
+    period: string;
+    location?: string;
+    summary: string;
+    highlights?: string[];
+    stack?: string[];
+}
+
+interface EducationEntry {
+    institution: string;
+    degree: string;
+    period: string;
+    summary: string;
+}
+
+interface MilestoneEntry {
+    year: string;
+    label: string;
+}
+
+interface Props {
+    experiences: ExperienceEntry[];
+    education: EducationEntry[];
+    milestones: MilestoneEntry[];
+}
+
+const { experiences, education, milestones } = Astro.props;
+---
+<section class="exp-list">
+    {
+        experiences.map((entry) => (
+            <article class="exp-card reveal">
+                <header class="exp-card__head">
+                    <div>
+                        <h3 class="exp-card__company">{entry.company}</h3>
+                        <p class="exp-card__role">{entry.role}</p>
+                    </div>
+                    <span class="exp-card__period mono">{entry.period}</span>
+                </header>
+                <p class="exp-card__summary">{entry.summary}</p>
+                {entry.highlights && entry.highlights.length > 0 && (
+                    <ul class="exp-card__highlights">
+                        {entry.highlights.map((h) => <li><span>{h}</span></li>)}
+                    </ul>
+                )}
+                {entry.stack && entry.stack.length > 0 && (
+                    <ul class="exp-card__stack">
+                        {entry.stack.map((tag) => <li class="mono">{tag}</li>)}
+                    </ul>
+                )}
+                {entry.location && (
+                    <p class="exp-card__location mono">{entry.location}</p>
+                )}
+            </article>
+        ))
+    }
+</section>
+
+<section class="exp-edu">
+    <h2 class="section-title">Education</h2>
+    <ul class="exp-edu__list">
+        {
+            education.map((entry) => (
+                <li class="exp-edu__item">
+                    <div>
+                        <p class="exp-edu__degree">{entry.degree}</p>
+                        <p class="exp-edu__inst">{entry.institution}</p>
+                    </div>
+                    <span class="exp-edu__period mono">{entry.period}</span>
+                </li>
+            ))
+        }
+    </ul>
+</section>
+
+<section class="exp-ms">
+    <h2 class="section-title">Milestones</h2>
+    <ul class="exp-ms__list">
+        {
+            milestones.map((entry) => (
+                <li class="exp-ms__item">
+                    <span class="exp-ms__year mono">{entry.year}</span>
+                    <span class="exp-ms__label">{entry.label}</span>
+                </li>
+            ))
+        }
+    </ul>
+</section>
+
+<style>
+    .exp-list {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .exp-card {
+        padding: 1.8rem 0;
+        border-top: 1px solid var(--hairline);
+    }
+
+    .exp-card:first-of-type {
+        border-top: 0;
+        padding-top: 0.5rem;
+    }
+
+    .exp-card__head {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 1.5rem;
+        margin-bottom: 0.7rem;
+    }
+
+    .exp-card__company {
+        font-size: 1.18rem;
+        font-weight: 600;
+        margin: 0 0 0.2rem;
+        letter-spacing: -0.01em;
+    }
+
+    .exp-card__role {
+        font-size: 0.92rem;
+        color: var(--text-muted);
+        margin: 0;
+    }
+
+    .exp-card__period {
+        font-size: 0.74rem;
+        color: var(--text-dim);
+        letter-spacing: 0.04em;
+        white-space: nowrap;
+        padding-top: 0.25rem;
+    }
+
+    .exp-card__summary {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        color: var(--text-muted);
+        margin: 0 0 0.9rem;
+        max-width: 60ch;
+    }
+
+    .exp-card__highlights {
+        list-style: none;
+        margin: 0 0 1rem;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.45rem;
+    }
+
+    .exp-card__highlights li {
+        font-size: 0.9rem;
+        line-height: 1.55;
+        color: var(--text-muted);
+        display: grid;
+        grid-template-columns: 0.9rem 1fr;
+        gap: 0.6rem;
+    }
+
+    .exp-card__highlights li::before {
+        content: '▸';
+        color: var(--text-dim);
+        font-size: 0.78rem;
+        line-height: 1.55;
+    }
+
+    .exp-card__stack {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.3rem 0.4rem;
+        list-style: none;
+        margin: 0 0 0.7rem;
+        padding: 0;
+    }
+
+    .exp-card__stack li {
+        font-size: 0.72rem;
+        color: var(--text-muted);
+        padding: 0.15em 0.55em;
+        border: 1px solid var(--border);
+    }
+
+    .exp-card__location {
+        font-size: 0.74rem;
+        color: var(--text-dim);
+        margin: 0;
+        letter-spacing: 0.04em;
+    }
+
+    /* Education */
+    .exp-edu {
+        margin-top: 3rem;
+    }
+
+    .exp-edu__list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .exp-edu__item {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 1.5rem;
+        padding: 1rem 0;
+        border-top: 1px solid var(--hairline);
+    }
+
+    .exp-edu__item:first-of-type {
+        border-top: 0;
+    }
+
+    .exp-edu__degree {
+        font-size: 1rem;
+        font-weight: 600;
+        margin: 0 0 0.15rem;
+        color: var(--text);
+    }
+
+    .exp-edu__inst {
+        font-size: 0.88rem;
+        color: var(--text-muted);
+        margin: 0;
+    }
+
+    .exp-edu__period {
+        font-size: 0.74rem;
+        color: var(--text-dim);
+        letter-spacing: 0.04em;
+        white-space: nowrap;
+        padding-top: 0.25rem;
+    }
+
+    /* Milestones */
+    .exp-ms {
+        margin-top: 3rem;
+    }
+
+    .exp-ms__list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .exp-ms__item {
+        display: grid;
+        grid-template-columns: 5ch 1fr;
+        gap: 1rem;
+        padding: 0.85rem 0;
+        border-top: 1px solid var(--hairline);
+        align-items: baseline;
+    }
+
+    .exp-ms__item:first-of-type {
+        border-top: 0;
+    }
+
+    .exp-ms__year {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--text);
+    }
+
+    .exp-ms__label {
+        font-size: 0.92rem;
+        color: var(--text-muted);
+        line-height: 1.55;
+    }
+
+    @media (max-width: 640px) {
+        .exp-card__head,
+        .exp-edu__item {
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .exp-card__period,
+        .exp-edu__period {
+            padding-top: 0;
+        }
+    }
+</style>
