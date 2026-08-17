@@ -19,7 +19,7 @@ const {
     ogType = 'website',
 } = Astro.props;
 
-const fullTitle = title === 'thiego.dev' ? title : `${title} — thiego.dev`;
+const fullTitle = title.includes('Thiego Moura') ? title : `${title} — Thiego Moura`;
 const ogImageUrl = new URL(ogImage, Astro.site).toString();
 ---
 <!doctype html>
