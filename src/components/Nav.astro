@@ -135,18 +135,33 @@ const links = [
             row-gap: 0;
         }
 
+        .nav-brand,
+        .theme-toggle,
+        .nav-toggle {
+            position: relative;
+            z-index: 50;
+        }
+
         .nav-toggle {
             display: inline-flex;
         }
 
         .nav-links {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
             display: none;
-            grid-column: 1 / -1;
             flex-direction: column;
             gap: 0;
-            padding: 0.6rem 0 0.3rem;
+            padding: 0.5rem var(--gutter) 0.8rem;
+            background: color-mix(in oklab, var(--bg) 92%, transparent);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
             border-top: 1px solid var(--hairline);
-            margin-top: 0.6rem;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+            z-index: 49;
+            overflow-y: auto;
         }
 
         .nav-root.is-open .nav-links {
