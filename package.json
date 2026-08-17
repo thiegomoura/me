@@ -12,7 +12,7 @@
     "prebuild": "tsx scripts/generate-og.ts"
   },
   "dependencies": {
-    "astro": "^5.0.0"
+    "astro": "^7.1.1"
   },
   "devDependencies": {
     "@astrojs/rss": "^4.0.19",
