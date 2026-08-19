@@ -6,7 +6,16 @@
       "period": "Oct 2023 — present",
       "location": "Brazil · Remote",
       "summary": "Implemented and maintained Clean Architecture solutions across application, APIs, and database. Application flow analysis and process improvement inside an agile team.",
-      "stack": ["Nest.js", "Express.js", "TypeScript", "Azure", "Docker", "Mocha", "Vitest", "Chai"],
+      "stack": [
+        "Nest.js",
+        "Express.js",
+        "TypeScript",
+        "Azure",
+        "Docker",
+        "Mocha",
+        "Vitest",
+        "Chai"
+      ],
       "highlights": [
         "Cut core application response time by ~90% (8s → 0.9s) through critical-path query rewrites and caching.",
         "Improved CI/CD pipeline efficiency by 40% (20min → 12min) and added obfuscation + minification across the build.",
@@ -18,9 +27,19 @@
       "company": "iClubs Soluções LTDA",
       "role": "Backend Software Engineer",
       "period": "Nov 2021 — Jun 2023",
-      "location": "Brazil",
+      "location": "Brazil · Remote",
       "summary": "Serverless infrastructure with Lambdas, APIs, messaging, and database. Owned feature delivery from analysis to deploy, with focus on flow improvement and automation.",
-      "stack": ["Node.js", "TypeScript", "AWS Lambda", "API Gateway", "DynamoDB", "MongoDB", "Jest", "Sinon", "Chai"],
+      "stack": [
+        "Node.js",
+        "TypeScript",
+        "AWS Lambda",
+        "API Gateway",
+        "DynamoDB",
+        "MongoDB",
+        "Jest",
+        "Sinon",
+        "Chai"
+      ],
       "highlights": [
         "Designed and built serverless microservices on AWS with DDD and Clean Architecture.",
         "Implemented NoSQL data models on DynamoDB and MongoDB for event-driven, async workloads.",
@@ -31,9 +50,17 @@
       "company": "Sunize",
       "role": "Full Stack Software Engineer",
       "period": "Apr 2022 — Jul 2022",
-      "location": "Brazil",
+      "location": "Brazil · Remote",
       "summary": "Short contract alongside iClubs. Application restructuring, new features, bug fixes, deploy, and data remodeling.",
-      "stack": ["React", "Node.js", "JavaScript", "TypeScript", "PostgreSQL", "Docker", "GitHub Actions"],
+      "stack": [
+        "React",
+        "Node.js",
+        "JavaScript",
+        "TypeScript",
+        "PostgreSQL",
+        "Docker",
+        "GitHub Actions"
+      ],
       "highlights": [
         "Restructured the application and shipped new features end-to-end (React + Node.js).",
         "Set up GitHub Actions CI/CD and Docker-based dev environments."
@@ -45,7 +72,14 @@
       "period": "Mar 2018 — Oct 2021",
       "location": "Brazil",
       "summary": "Network integrity, security assets (firewall), institutional website administration, and IT support to operational and management-level users.",
-      "stack": ["WordPress", "HTML", "CSS", "PostgreSQL", "VMWare", "Windows Server"],
+      "stack": [
+        "WordPress",
+        "HTML",
+        "CSS",
+        "PostgreSQL",
+        "VMWare",
+        "Windows Server"
+      ],
       "highlights": [
         "Administered corporate network and security assets; ran firewall and vulnerability scans.",
         "Maintained core services and servers (DHCP, WSUS, AD, GPO, IIS, WDS) and virtualized infra on VMWare."
