@@ -308,9 +308,8 @@ hr {
 }
 
 .article-link {
-    display: grid;
-    grid-template-columns: 8ch 1fr;
-    column-gap: 1.2rem;
+    display: flex;
+    flex-direction: column;
     row-gap: 0.3rem;
     padding: 1.2rem 0;
     color: var(--text);

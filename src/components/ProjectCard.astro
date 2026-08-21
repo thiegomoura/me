@@ -10,8 +10,18 @@ interface Props {
     metricLabel: string;
 }
 
-const { slug, title, context, period, tags, summary, metricValue, metricLabel } = Astro.props;
+const {
+    slug,
+    title,
+    context,
+    period,
+    tags,
+    summary,
+    metricValue,
+    metricLabel,
+} = Astro.props;
 ---
+
 <article class="project-card reveal">
     <header class="project-card__head">
         <div>
@@ -39,6 +49,11 @@ const { slug, title, context, period, tags, summary, metricValue, metricLabel } 
         border-top: 1px solid var(--hairline);
     }
 
+    .project-card:hover {
+        color: var(--text);
+        background: color-mix(in oklab, var(--surface-2) 50%, transparent);
+    }
+
     .project-card:first-of-type {
         border-top: 0;
         padding-top: 0.5rem;
@@ -56,6 +71,10 @@ const { slug, title, context, period, tags, summary, metricValue, metricLabel } 
         font-size: 1.15rem;
         font-weight: 600;
         margin-bottom: 0.2rem;
+    }
+
+    .project-card:hover .project-card__title {
+        color: var(--accent);
     }
 
     .project-card__context {
