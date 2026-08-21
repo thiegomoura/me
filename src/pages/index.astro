@@ -1,64 +1,98 @@
 ---
-import { getCollection } from 'astro:content';
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Hero from '../components/Hero.astro';
-import AsciiPortrait from '../components/AsciiPortrait.astro';
-import SkillGroup from '../components/SkillGroup.astro';
-import ProjectCard from '../components/ProjectCard.astro';
-import { readingTime, formatReadingTime } from '../utils/reading-time';
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import AsciiPortrait from "../components/AsciiPortrait.astro";
+import SkillGroup from "../components/SkillGroup.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import { readingTime, formatReadingTime } from "../utils/reading-time";
 
 const stats = [
-    { value: '5+ years', label: 'building production backends' },
-    { value: '10+ APIs', label: 'in production today' },
-    { value: '99.95%', label: 'SLA maintained' },
+    { value: "5+ years", label: "building production backends" },
+    { value: "10+ APIs", label: "in production today" },
+    { value: "99.95%", label: "SLA maintained" },
 ];
 
 const deliverables = [
-    'Cut a critical endpoint from 8s to 0.9s — ~90% latency reduction through query rewrites and caching.',
-    'Took CI from 20min to 12min and added obfuscation + minification across the pipeline.',
-    'Designed a generic, table-agnostic offline-first sync service used across multiple product modules.',
-    'Architect with Clean Architecture and DDD — I ship code that other engineers want to read.',
+    "Cut a critical endpoint from 14s to 150ms — ~99% latency reduction through query optimization, processing improvements, and caching.",
+    "Took CI from 20min to 12min and added obfuscation + minification across the pipeline.",
+    "Designed a generic, table-agnostic offline-first sync service used across multiple product modules.",
+    "Architect with Clean Architecture and DDD — I ship code that other engineers want to read.",
 ];
 
 const skills = [
     {
-        title: 'Languages & Runtimes',
-        level: 'Daily use',
-        items: ['TypeScript', 'JavaScript', 'Node.js', 'Python', 'Shell'],
+        title: "Languages & Runtimes",
+        level: "Daily use",
+        items: ["TypeScript", "JavaScript", "Node.js", "Python", "Shell"],
     },
     {
-        title: 'Backend & APIs',
-        level: 'Primary stack',
-        items: ['Nest.js', 'Express', 'Fastify', 'REST', 'GraphQL', 'gRPC', 'Clean Architecture', 'DDD'],
+        title: "Backend & APIs",
+        level: "Primary stack",
+        items: [
+            "Nest.js",
+            "Express",
+            "Fastify",
+            "REST",
+            "GraphQL",
+            "gRPC",
+            "Clean Architecture",
+            "DDD",
+        ],
     },
     {
-        title: 'Data & Messaging',
-        level: 'Production',
-        items: ['PostgreSQL', 'MongoDB', 'Redis', 'RabbitMQ', 'DynamoDB'],
+        title: "Data & Messaging",
+        level: "Production",
+        items: ["PostgreSQL", "MongoDB", "Redis", "RabbitMQ", "DynamoDB"],
     },
     {
-        title: 'Cloud & Delivery',
-        level: 'Hands-on',
-        items: ['AWS', 'Azure', 'Docker', 'Kubernetes', 'Terraform', 'Lambda', 'CI/CD', 'GitHub Actions'],
+        title: "Cloud & Delivery",
+        level: "Hands-on",
+        items: [
+            "AWS",
+            "Azure",
+            "Docker",
+            "Kubernetes",
+            "Terraform",
+            "Lambda",
+            "CI/CD",
+            "GitHub Actions",
+        ],
     },
     {
-        title: 'Observability & Quality',
-        level: 'Operate what you ship',
-        items: ['OpenTelemetry', 'Prometheus', 'Grafana', 'Jest', 'Vitest', 'Supertest', 'Mocha'],
+        title: "Observability & Quality",
+        level: "Operate what you ship",
+        items: [
+            "OpenTelemetry",
+            "Prometheus",
+            "Grafana",
+            "Jest",
+            "Vitest",
+            "Supertest",
+            "Mocha",
+        ],
     },
     {
-        title: 'Security & AI',
-        level: 'Edge-to-app',
-        items: ['Helmet', 'Rate Limiting', 'OAuth2 / OIDC', 'JWT', 'OWASP', 'OpenAI SDK', 'Anthropic SDK'],
+        title: "Security & AI",
+        level: "Edge-to-app",
+        items: [
+            "Helmet",
+            "Rate Limiting",
+            "OAuth2 / OIDC",
+            "JWT",
+            "OWASP",
+            "OpenAI SDK",
+            "Anthropic SDK",
+        ],
     },
 ];
 
-const allStudies = await getCollection('case-studies');
+const allStudies = await getCollection("case-studies");
 const projects = allStudies
     .sort((a, b) => a.data.order - b.data.order)
     .slice(0, 1)
     .map((s) => ({
-        slug: `case-study/${s.id.replace(/\.md$/, '')}/`,
+        slug: `case-study/${s.id.replace(/\.md$/, "")}/`,
         title: s.data.title,
         context: s.data.context,
         period: s.data.period,
@@ -68,7 +102,7 @@ const projects = allStudies
         metricLabel: s.data.metric.label,
     }));
 
-const allArticles = await getCollection('articles');
+const allArticles = await getCollection("articles");
 const articles = allArticles
     .filter((a) => !a.data.draft)
     .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
@@ -76,10 +110,14 @@ const articles = allArticles
     .map((a) => ({
         ...a,
         date: a.data.pubDate.toISOString().slice(0, 10),
-        time: formatReadingTime(readingTime(a.body ?? '')),
+        time: formatReadingTime(readingTime(a.body ?? "")),
     }));
 ---
-<BaseLayout title="Thiego Moura — Backend Software Engineer" pageClass="page-home">
+
+<BaseLayout
+    title="Thiego Moura — Backend Software Engineer"
+    pageClass="page-home"
+>
     <AsciiPortrait />
 
     <Hero
@@ -91,10 +129,18 @@ const articles = allArticles
     <section class="section">
         <h2 class="section-title">What I deliver</h2>
         <ul class="marker-list">
-            {deliverables.map((item) => <li><span>{item}</span></li>)}
+            {
+                deliverables.map((item) => (
+                    <li>
+                        <span>{item}</span>
+                    </li>
+                ))
+            }
         </ul>
         <p class="section-cta">
-            <a class="btn btn--ghost" href="/experience">See full experience →</a>
+            <a class="btn btn--ghost" href="/experience"
+                >See full experience →</a
+            >
         </p>
     </section>
 
@@ -107,30 +153,41 @@ const articles = allArticles
 
     <section class="section">
         <h2 class="section-title">Select Articles</h2>
-        {articles.length === 0 ? (
-            <p class="empty mono">no articles published yet</p>
-        ) : (
-            <ul class="articles-list">
-                {articles.map((a) => (
-                    <li>
-                        <a href={`/articles/${a.id.replace(/\.md$/, '')}/`} class="article-link">
-                            <span class="article-date mono">
-                                {a.date}
-                                <span class="article-meta-sep"> · </span>
-                                {a.time}
-                            </span>
-                            <span class="article-title">{a.data.title}</span>
-                            <span class="article-desc">{a.data.description}</span>
-                            {a.data.tags.length > 0 && (
-                                <span class="article-tags mono">
-                                    {a.data.tags.map((t) => `#${t}`).join(' ')}
+        {
+            articles.length === 0 ? (
+                <p class="empty mono">no articles published yet</p>
+            ) : (
+                <ul class="articles-list">
+                    {articles.map((a) => (
+                        <li>
+                            <a
+                                href={`/articles/${a.id.replace(/\.md$/, "")}/`}
+                                class="article-link"
+                            >
+                                <span class="article-date mono">
+                                    {a.date}
+                                    <span class="article-meta-sep"> · </span>
+                                    {a.time}
                                 </span>
-                            )}
-                        </a>
-                    </li>
-                ))}
-            </ul>
-        )}
+                                <span class="article-title">
+                                    {a.data.title}
+                                </span>
+                                <span class="article-desc">
+                                    {a.data.description}
+                                </span>
+                                {a.data.tags.length > 0 && (
+                                    <span class="article-tags mono">
+                                        {a.data.tags
+                                            .map((t) => `#${t}`)
+                                            .join(" ")}
+                                    </span>
+                                )}
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            )
+        }
         <p class="section-cta">
             <a class="btn btn--ghost" href="/articles">See all articles →</a>
         </p>
